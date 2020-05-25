@@ -6,6 +6,7 @@
 
 `ifndef AHB2APB_SQC
 `define AHB2APB_SQC
+import env_pkg::*;
 
 class base_sequence extends uvm_sequence #(uvm_sequence_item);
 	`uvm_declare_p_sequencer(virtual_sequencer)

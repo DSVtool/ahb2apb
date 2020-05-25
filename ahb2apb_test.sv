@@ -7,6 +7,7 @@
 
 `ifndef AHB2APB_TEST
 `define AHB2APB_TEST
+import env_pkg::*;
 
 class ahb2apb_test extends uvm_test;
 	
