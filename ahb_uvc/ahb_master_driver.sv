@@ -52,7 +52,7 @@ task ahb_master_drv::run_phase(uvm_phase phase);
 	init();	
 
 	forever begin
-		@(`AHB_MASTER_IF);
+		@(`AHB_IF);
 
 		fork
 			begin

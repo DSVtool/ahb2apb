@@ -52,7 +52,7 @@ task apb_master_drv::run_phase(uvm_phase phase);
 	init();	
 
 	forever begin
-		@(`APB_MASTER_IF);
+		@(`APB_IF);
 
 		fork
 			begin
@@ -110,8 +110,11 @@ task apb_master_drv::drive();
 						@(posedge vif.clk);
 						`APB_IF.pready = 0;	
 					end	
+				end	
 			else
-				break;			
+				begin
+					break;	
+				end			
 		end
 endtask
 

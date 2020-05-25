@@ -80,7 +80,6 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32)  extends uvm_sequence_item;
 		(hsize = 3'b111) -> addr[6:0] = 7'b0;
 	}
 
-
 endclass
 
 function ahb_tr::new(string name = "ahb_tr");
