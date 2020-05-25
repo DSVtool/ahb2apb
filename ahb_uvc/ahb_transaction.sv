@@ -43,10 +43,8 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32)  extends uvm_sequence_item;
 		`uvm_field_enum(ETransPhase, transaction_phase, UVM_ALL_ON);
 	`uvm_object_utils_end
 	    
-	extern function new(string name = "ahb_tr");
-
     constraint general_c {	
-    	hsize < $clog2([AHB_DW])-2;
+    	hsize < $clog2(AHB_DW)-2;
 		tr_delay inside {[0:60]};
 		soft hsel = 1;
 	}
@@ -59,9 +57,12 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32)  extends uvm_sequence_item;
 	constraint blenght_c{
 		hburst == 3'b000 -> blenght == 1     	
 		hburst == 3'b001 -> blength == undefburst_lenght;		 		// "undefined" length INC burst
-		(hburst == 3'b010) or (hburst == 3'b011) -> blength == 4;		// INC4 or WRAP4
-		(hburst == 3'b100) or (hburst == 3'b101) -> blength == 8;		// INC8 or WRAP8
-		(hburst == 3'b110) or (hburst == 3'b111) -> blength == 16;		// INC16 or WRAP16
+		hburst == 3'b010 -> blength == 4;		
+		hburst == 3'b011 -> blength == 4;		
+		hburst == 3'b100 -> blength == 8;		
+		hburst == 3'b101 -> blength == 8;		
+		hburst == 3'b110 -> blength == 16;
+		hburst == 3'b111 -> blength == 16;		
 	}
 	
 	constraint order_c {
@@ -79,6 +80,8 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32)  extends uvm_sequence_item;
 		(hsize = 3'b110) -> addr[5:0] = 6'b0;
 		(hsize = 3'b111) -> addr[6:0] = 7'b0;
 	}
+
+	extern function new(string name = "ahb_tr");
 
 endclass
 
