@@ -6,7 +6,6 @@
 
 `ifndef AHB2APB_ENVIROMENT
 `define AHB2APB_ENVIROMENT
-import env_pkg::*;
 
 class ahb2apb_env extends uvm_env;
 

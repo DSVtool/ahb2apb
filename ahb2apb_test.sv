@@ -4,10 +4,8 @@
 // File description:    AHB2APB bridge module test
 // File history: 		0.1  - Dimitrije S. - Inital version.
 
-
 `ifndef AHB2APB_TEST
 `define AHB2APB_TEST
-import env_pkg::*;
 
 class ahb2apb_test extends uvm_test;
 	

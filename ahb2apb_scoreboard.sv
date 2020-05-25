@@ -6,7 +6,6 @@
 
 `ifndef AHB2APB_SCOREBOARD
 `define AHB2APB_SCOREBOARD
-import env_pkg::*;
 
 class ahb2apb_scoreboard extends uvm_scoreboard;
 
