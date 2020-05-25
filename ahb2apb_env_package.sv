@@ -15,8 +15,17 @@ package env_pkg;
 	import uvm_pkg::*;
 	`include "uvm_macros.svh"
 
-	import ahb_pkg::*;
-	import apb_pkg::*;
+	`include "ahb_master_agent.sv"
+	`include "ahb_master_driver.sv"
+	`include "ahb_transaction.sv"
+	`include "ahb_monitor.sv"
+	`include "ahb_master_sequencer.sv"
+	
+	`include "apb_master_agent.sv"
+	`include "apb_master_driver.sv"
+	`include "apb_transaction.sv"
+	`include "apb_monitor.sv"
+	`include "apb_master_sequencer.sv"
 
 	`include "bridge_macros.sv"
 
