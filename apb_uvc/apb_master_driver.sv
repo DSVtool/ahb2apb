@@ -94,7 +94,7 @@ task apb_master_drv::drive();
 					while (!enable_flag)													//Wait for ready signal
 						begin
 							@(posedge vif.clk);												//Sta ako su spremni pre prve clk ivice?
-							if(`AHB_IF.penable)
+							if(`APB_IF.penable)
 								enable_flag = 1;
 						end
 				if(`APB_IF.pwrite) 															//write transfer

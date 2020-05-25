@@ -5,9 +5,11 @@
 // File history: 		0.1  - Dimitrije S. - Inital version.
 
 module ahb2apb_testbench;
-	
+
 	import env_pkg::*;
 	import uvm_pkg::*;
+
+	`include "ahb2apb_test.sv"
 
 	bit clk;
 	bit reset_n;

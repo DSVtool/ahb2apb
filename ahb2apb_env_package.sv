@@ -7,9 +7,6 @@
 `ifndef ENV_PKG
 `define ENV_PKG
 
-`include "ahb_interface.sv"
-`include "apb_interface.sv"
-
 package env_pkg;  
 
 	import uvm_pkg::*;
@@ -20,11 +17,10 @@ package env_pkg;
 
 	`include "bridge_macros.sv"
 
-	`include "ahb2apb_enviroment.sv"
-	`include "ahb2apb_scoreboard.sv"
-	`include "ahb2apb_sequence.sv"
 	`include "ahb2apb_virtual_sequencer.sv"
-	`include "ahb2apb_test.sv"
+	`include "ahb2apb_scoreboard.sv"
+	`include "ahb2apb_enviroment.sv"
+	`include "ahb2apb_sequence.sv"
 
 endpackage
 

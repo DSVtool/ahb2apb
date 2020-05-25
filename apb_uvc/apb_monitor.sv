@@ -85,7 +85,7 @@ task apb_monitor::main_task();
 	`uvm_info("apb_monitor", "monitor main started", UVM_LOW);
 
 	forever begin
-		if(`AHB_MON_IF.pready && `AHB_MON_IF.penable)
+		if(`APB_MON_IF.pready && `APB_MON_IF.penable)
 			@(posedge clk);
 				begin
 					trans = ahb_tr #(APB_DW,APB_AW)::type_id::create("trans");

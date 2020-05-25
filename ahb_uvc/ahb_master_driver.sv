@@ -102,33 +102,36 @@ task ahb_master_drv::drive();
 	@(posedge vif.clk);
 	
 	case(req.hburst) 																	
-		3'b000	:	`AHB_IF.haddr  = req.haddr;												/*single burst transfer*/
-					`AHB_IF.hsize  = req.hsize;
-					`AHB_IF.hwrite = req.hwrite;
-					`AHB_IF.htrans = 2'b10;
-					
-					if(req.hwrite)															/*write transfer*/
-						begin
-							while (!ready_flag)												//Wait for ready signal
-								begin
-									@(posedge vif.clk);
-									if(`AHB_IF.hready)
-										ready_flag = 1;
-								end
-							`AHB_IF.hwdata = req.hwdata[0];					
-						end			
-					else																	/*read transfer*/
-						begin
-							while (!ready_flag)												//Wait for ready signal
-								begin
-									@(posedge vif.clk);
-									if(`AHB_IF.hready)
-										ready_flag = 1;
-								end			
-							`AHB_IF.hrdata = req.hrdata;
-						end
+		3'b000	:	begin
+						`AHB_IF.haddr  = req.haddr;												/*single burst transfer*/
+						`AHB_IF.hsize  = req.hsize;
+						`AHB_IF.hwrite = req.hwrite;
+						`AHB_IF.htrans = 2'b10;
+						
+						if(req.hwrite)															/*write transfer*/
+							begin
+								while (!ready_flag)												//Wait for ready signal
+									begin
+										@(posedge vif.clk);
+										if(`AHB_IF.hready)
+											ready_flag = 1;
+									end
+								`AHB_IF.hwdata = req.hwdata[0];					
+							end			
+						else																	/*read transfer*/
+							begin
+								while (!ready_flag)												//Wait for ready signal
+									begin
+										@(posedge vif.clk);
+										if(`AHB_IF.hready)
+											ready_flag = 1;
+									end			
+								`AHB_IF.hrdata = req.hrdata;
+							end
+					end
 											
-		3'b001	:	`AHB_IF.hsize  = req.hsize;												/*incr burst of undefined lenght*/	
+		3'b001	:	
+					`AHB_IF.hsize  = req.hsize;												/*incr burst of undefined lenght*/	
 					`AHB_IF.haddr  = req.haddr;
 					`AHB_IF.hwrite = req.hwrite;
 					`AHB_IF.undefburst_lenght = req.undefburst_lenght;
