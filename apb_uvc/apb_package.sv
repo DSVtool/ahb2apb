@@ -7,8 +7,6 @@
 `ifndef APB_PKG
 `define APB_PKG
 
-  import uvm_pkg::*;
-
 `include "apb_interface.sv"
 
 package apb_pkg;  

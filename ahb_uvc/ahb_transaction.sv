@@ -7,13 +7,13 @@
 `ifndef АHB_TR
 `define АHB_TR
 
-class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32)  extends uvm_sequence_item;
+class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 
 	rand bit [AHB_AW:0] haddr;				// All transfers in a burst must be aligned to the address boundary equal to the size of the transfer. Page34
 		 bit [AHB_DW:0] hrdata;	
     rand bit [2:0]  hburst;
-    rand bit [2:0]  hsize; 				// The transfer size set by HSIZE must be less than or equal to the width of the data bus.			
-    rand bit [1:0]  htrans;  			// 00-IDLE / 01-BUSY / 10-NONSEQUENTAL / 11-SEQUENTAL
+    rand bit [2:0]  hsize; 					// The transfer size set by HSIZE must be less than or equal to the width of the data bus.			
+    rand bit [1:0]  htrans;  				// 00-IDLE / 01-BUSY / 10-NONSEQUENTAL / 11-SEQUENTAL
 	rand bit 		hwrite;
    		 bit 		hready;
    		 bit 		hsel;
