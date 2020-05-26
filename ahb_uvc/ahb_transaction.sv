@@ -9,7 +9,9 @@
 
 class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 
-	rand bit [AHB_AW-1:0] haddr;				// All transfers in a burst must be aligned to the address boundary equal to the size of the transfer. Page34
+    int max_length = 50;  					// max "undefined length" for allocating a dynamic array
+
+	rand bit [AHB_AW-1:0] haddr;			// All transfers in a burst must be aligned to the address boundary equal to the size of the transfer. Page34
 		 bit [AHB_DW-1:0] hrdata;	
     rand bit [2:0]  hburst;
     rand bit [2:0]  hsize; 					// The transfer size set by HSIZE must be less than or equal to the width of the data bus.			
@@ -21,7 +23,7 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 	rand int 		blenght;
 	rand int		undefburst_lenght;
 	
-	rand bit [AHB_DW-1:0] /*[blenght-1:0]*/ hwdata [];   
+	rand bit [AHB_DW-1:0] hwdata [];   
 	
 	`uvm_object_param_utils_begin(ahb_tr)
 		`uvm_field_int (haddr, 			   UVM_ALL_ON)
@@ -45,6 +47,7 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 	}
 	
 	constraint undefburst_c {	
+		undefburst_lenght  inside {[1:max_length]};
 		if( hburst !== 1)
 			undefburst_lenght == 0;
 	}
@@ -75,6 +78,10 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 		hsize == 3'b101 -> addr[4:0] == 5'b0;
 		hsize == 3'b110 -> addr[5:0] == 6'b0;
 		hsize == 3'b111 -> addr[6:0] == 7'b0;
+	}
+
+	constraint default_dyn_arr {
+		hwdata.size() == max_length;	   
 	}
 
 	function void post_randomize();
