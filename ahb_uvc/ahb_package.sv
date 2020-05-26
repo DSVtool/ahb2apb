@@ -22,4 +22,4 @@ package ahb_pkg;
 
 endpackage
 
-`endif //ahb_pkg
+`endif //AHB_PKG
