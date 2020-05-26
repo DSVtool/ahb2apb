@@ -54,4 +54,8 @@ function void apb_master_agent::connect_phase(uvm_phase phase);
 
 endfunction
 
+function void apb_master_agent::run_phase(uvm_phase phase);
+	super.run_phase(phase);
+endfunction
+
 `endif //APB_MASTER_AGENT
