@@ -39,6 +39,10 @@ function void apb_master_drv::build_phase(uvm_phase phase);
 		
 endfunction
 
+function void apb_master_drv::connect_phase(uvm_phase phase);
+	super.build_phase(phase);		
+endfunction
+
 task apb_master_drv::run_phase(uvm_phase phase);
 	super.run_phase(phase);
 
