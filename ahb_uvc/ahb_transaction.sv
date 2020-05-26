@@ -21,7 +21,7 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 	rand int 		blenght;
 	rand int		undefburst_lenght;
 	
-	rand bit [AHB_DW-1:0] [blenght-1:0] hwdata;   
+	rand bit [AHB_DW-1:0] /*[blenght-1:0]*/ hwdata [];   
 	
 	`uvm_object_param_utils_begin(ahb_tr)
 		`uvm_field_int (haddr, 			   UVM_ALL_ON)
@@ -76,6 +76,11 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 		hsize == 3'b110 -> addr[5:0] == 6'b0;
 		hsize == 3'b111 -> addr[6:0] == 7'b0;
 	}
+
+
+	function void post_randomize();
+		hwdata = new[length];
+	endfunction 
 
 	extern function new(string name = "ahb_tr");
 
