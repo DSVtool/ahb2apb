@@ -27,8 +27,10 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 
 	`uvm_object_param_utils_begin(ahb_tr)
 		`uvm_field_int (haddr, 			   UVM_ALL_ON)
+		`uvm_field_int (hwdata, 		   UVM_ALL_ON)
 		`uvm_field_int (hrdata, 		   UVM_ALL_ON)
-		`uvm_field_int (hburst, 	`endif	   UVM_ALL_ON)
+		`uvm_field_int (hburst, 		   UVM_ALL_ON)
+		`uvm_field_int (hsize, 			   UVM_ALL_ON)
 		`uvm_field_int (hwrite,   		   UVM_ALL_ON)
 		`uvm_field_int (hready, 		   UVM_ALL_ON)
 		`uvm_field_int (hsel,    		   UVM_ALL_ON)
@@ -38,7 +40,6 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 		`uvm_field_int (htrans,			   UVM_ALL_ON)		
 		`uvm_field_int (blenght,  		   UVM_ALL_ON)
 		`uvm_field_int (tr_delay,		   UVM_ALL_ON)
-		`uvm_field_array_int (hwdata, 		   UVM_ALL_ON)
 		`uvm_field_enum(ETransPhase, transaction_phase, UVM_ALL_ON);
 	`uvm_object_utils_end
 	    
