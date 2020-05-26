@@ -16,8 +16,8 @@ package apb_pkg;
 	import uvm_pkg::*;
 	`include "uvm_macros.svh" 
 
-	`include "apb_master_driver.sv"
 	`include "apb_transaction.sv"
+	`include "apb_master_driver.sv"
 	`include "apb_monitor.sv"
 	`include "apb_master_sequencer.sv"
 	`include "apb_master_agent.sv"

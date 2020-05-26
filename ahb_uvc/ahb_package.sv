@@ -7,8 +7,6 @@
 `ifndef AHB_PKG
 `define AHB_PKG
 
-  import uvm_pkg::*;
-
 `include "ahb_interface.sv"
 
 package ahb_pkg;  
@@ -16,8 +14,8 @@ package ahb_pkg;
 	import uvm_pkg::*;
 	`include "uvm_macros.svh" 
 
-	`include "ahb_master_driver.sv"
 	`include "ahb_transaction.sv"
+	`include "ahb_master_driver.sv"
 	`include "ahb_monitor.sv"
 	`include "ahb_master_sequencer.sv"
 	`include "ahb_master_agent.sv"
