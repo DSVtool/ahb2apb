@@ -9,7 +9,7 @@
 
 class ahb2apb_scoreboard extends uvm_scoreboard;
 
-	int apb_width = 32;
+	int apb_width = `APB_BUS_W;
 
 	`uvm_component_utils(ahb2apb_scoreboard)
 

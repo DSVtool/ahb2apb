@@ -18,13 +18,11 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
    		 bit 		hready;
    		 bit 		hsel;
 	rand int 		tr_delay;
-		 int 		blenght;
+	rand int 		blenght;
 	rand int		undefburst_lenght;
 	
 	rand bit [AHB_DW-1:0][blenght:0]  hwdata;   
 	
-	ETransPhase 	transaction_phase; 
-
 	`uvm_object_param_utils_begin(ahb_tr)
 		`uvm_field_int (haddr, 			   UVM_ALL_ON)
 		`uvm_field_int (hwdata, 		   UVM_ALL_ON)
@@ -40,7 +38,6 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 		`uvm_field_int (htrans,			   UVM_ALL_ON)		
 		`uvm_field_int (blenght,  		   UVM_ALL_ON)
 		`uvm_field_int (tr_delay,		   UVM_ALL_ON)
-		`uvm_field_enum(ETransPhase, transaction_phase, UVM_ALL_ON);
 	`uvm_object_utils_end
 	    
     constraint general_c {	
@@ -67,7 +64,8 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 	
 	constraint order_c {
 		solve hburst before blenght;
-		solve undefburst_c before blenght;
+		solve hburst before undefburst_lenght;
+		solve undefburst_lenght before blenght;
 		solve blenght before hwdata;
     }
 
