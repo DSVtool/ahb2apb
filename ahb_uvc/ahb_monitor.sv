@@ -12,7 +12,6 @@
 class ahb_monitor #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_monitor;
 
 	virtual ahb_vif #(AHB_DW,AHB_AW) vif;
-			ahb_cfg #(AHB_DW,AHB_AW) cfg;
 
 	uvm_analysis_port #(ahb_tr #(AHB_DW,AHB_AW)) default_ap;
 
@@ -42,11 +41,6 @@ function void ahb_monitor::build_phase(uvm_phase phase);
 	if(!uvm_config_db#(virtual ahb_vif #(AHB_DW,AHB_AW))::get(this, "", "vif", vif))
 		begin
 			`uvm_fatal("ahb_monitor - build_phase", "vif not set!");
-		end
-
-	if(!uvm_config_db#(ahb_cfg #(AHB_DW,AHB_AW))::get(this, "", "cfg", cfg))
-		begin
-			`uvm_fatal("ahb_monitor - build_phase", "cfg not set!");
 		end
 
 	uvm_config_db#(int)::get(this, "", "clk_t", tclk);
@@ -115,7 +109,7 @@ task ahb_monitor::main_task();
 							if(trans_prev == 3 && (trans_curr == 0 || trans_curr == 2))
 								trans_flag = 1;
 
-							default_ap.writeh(trans);													// writing to the analysis port
+							default_ap.write(trans);													// writing to the analysis port
 					end	
 		end				
 	end	

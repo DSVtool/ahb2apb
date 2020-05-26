@@ -12,7 +12,6 @@
 class apb_master_drv #(parameter APB_DW = 32, APB_AW = 32) extends uvm_driver #(apb_tr);
 
 	virtual apb_vif #(APB_DW,APB_AW) vif;
-			apb_cfg #(APB_DW,APB_AW) cfg;
 
 	`uvm_component_param_utils(apb_master_drv #(APB_DW,APB_AW)) 
 
@@ -37,12 +36,7 @@ function void apb_master_drv::build_phase(uvm_phase phase);
 		begin
 			`uvm_fatal("apb_master_drv - build_phase", "vif not set!");
 		end
-
-	if(!uvm_config_db#(apb_cfg #(APB_DW,APB_AW))::get(this, "", "cfg", cfg))
-		begin
-			`uvm_fatal("apb_master_drv - build_phase", "cfg not set!");
-		end
-
+		
 endfunction
 
 task apb_master_drv::run_phase(uvm_phase phase);

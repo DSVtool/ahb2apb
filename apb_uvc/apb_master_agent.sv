@@ -14,7 +14,6 @@ class apb_master_agent #(parameter APB_DW = 32, APB_AW = 32) extends uvm_agent;
 	apb_master_drv #(APB_DW,APB_AW) 		drv;
 	apb_master_sqr #(APB_DW,APB_AW) 		sqr;
 	apb_monitor    #(APB_DW,APB_AW)			mon;
-	apb_cfg        #(APB_DW,APB_AW)			cfg;
 
 	extern function new(string name = "apb_master_agent", uvm_component parent = null);
 
@@ -32,11 +31,6 @@ function void apb_master_agent::build_phase(uvm_phase phase);
 	super.build_phase(phase);
 
 	uvm_config_db#(uvm_active_passive_enum)::get(this, "", "is_active", is_active);
-
-	if(!uvm_config_db#(apb_cfg #(APB_DW,APB_AW))::get(this, "", "cfg", cfg))
-		begin
-			`uvm_fatal("apb_master_agent - build_phase", "cfg not set!");
-		end
 
 	`uvm_info("apb_master_agent - build_phase", $psprintf("active passive enum val %s", is_active.name()), UVM_NONE);
 

@@ -12,7 +12,6 @@
 class apb_monitor #(parameter APB_DW = 32, APB_AW = 32) extends uvm_monitor;
 
 	virtual apb_vif #(APB_DW,APB_AW) vif;
-			apb_cfg #(APB_DW,APB_AW) cfg;
 
 	uvm_analysis_port #(apb_tr #(APB_DW,APB_AW)) default_ap;
 
@@ -42,11 +41,6 @@ function void apb_monitor::build_phase(uvm_phase phase);
 	if(!uvm_config_db#(virtual apb_vif #(APB_DW,APB_AW))::get(this, "", "vif", vif))
 		begin
 			`uvm_fatal("apb_monitor - build_phase", "vif not set!");
-		end
-
-	if(!uvm_config_db#(apb_cfg #(APB_DW,APB_AW))::get(this, "", "cfg", cfg))
-		begin
-			`uvm_fatal("apb_monitor - build_phase", "cfg not set!");
 		end
 
 	uvm_config_db#(int)::get(this, "", "clk_t", tclk);
@@ -98,7 +92,7 @@ task apb_monitor::main_task();
 					trans.penable  = `APB_MON_IF.penable;
 					trans.pready   = `APB_MON_IF.pready;
 						
-					default_ap.writep(trans);			
+					default_ap.write(trans);			
 				end			
 	end	
 endtask

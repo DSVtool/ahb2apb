@@ -12,7 +12,6 @@
 class ahb_master_drv #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_driver #(ahb_tr #(AHB_DW,AHB_AW));
 
 	virtual ahb_vif #(AHB_DW,AHB_AW)  vif;
-			ahb_cfg #(AHB_DW,AHB_AW)  cfg;
 
 	`uvm_component_param_utils(ahb_master_drv #(AHB_DW,AHB_AW)) 
 
@@ -36,11 +35,6 @@ function void ahb_master_drv::build_phase(uvm_phase phase);
 	if(!uvm_config_db#(virtual ahb_vif #(AHB_DW,AHB_AW))::get(this, "", "vif", vif))
 		begin
 			`uvm_fatal("ahb_master_drv - build_phase", "vif not set!");
-		end
-
-	if(!uvm_config_db#(ahb_cfg #(AHB_DW,AHB_AW))::get(this, "", "cfg", cfg))
-		begin
-			`uvm_fatal("ahb_master_drv - build_phase", "cfg not set!");
 		end
 
 endfunction

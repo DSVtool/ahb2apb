@@ -32,8 +32,6 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 		`uvm_field_int (hwrite,   		   UVM_ALL_ON)
 		`uvm_field_int (hready, 		   UVM_ALL_ON)
 		`uvm_field_int (hsel,    		   UVM_ALL_ON)
-		`uvm_field_int (hresp, 	   		   UVM_ALL_ON)
-		`uvm_field_int (hexokay,   		   UVM_ALL_ON)
 		`uvm_field_int (undefburst_lenght, UVM_ALL_ON)
 		`uvm_field_int (htrans,			   UVM_ALL_ON)		
 		`uvm_field_int (blenght,  		   UVM_ALL_ON)
