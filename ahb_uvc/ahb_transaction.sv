@@ -1,11 +1,11 @@
+`ifndef АHB_TR
+`define АHB_TR
+
 // File name: 			AHB_Transaction.sv
 // Creator name: 		Dimitrije Selken
 // Current version: 	0.1
 // File description:    AHB VIP module transaction
 // File history: 		0.1  - Dimitrije S. - Inital version.
-
-`ifndef АHB_TR
-`define АHB_TR
 
 class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 
