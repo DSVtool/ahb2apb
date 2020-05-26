@@ -77,9 +77,8 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 		hsize == 3'b111 -> addr[6:0] == 7'b0;
 	}
 
-
 	function void post_randomize();
-		hwdata = new[length];
+		hwdata = new[blength];
 	endfunction 
 
 	extern function new(string name = "ahb_tr");
