@@ -9,8 +9,8 @@
 
 class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 
-	rand bit [AHB_AW:0] haddr;				// All transfers in a burst must be aligned to the address boundary equal to the size of the transfer. Page34
-		 bit [AHB_DW:0] hrdata;	
+	rand bit [AHB_AW-1:0] haddr;				// All transfers in a burst must be aligned to the address boundary equal to the size of the transfer. Page34
+		 bit [AHB_DW-1:0] hrdata;	
     rand bit [2:0]  hburst;
     rand bit [2:0]  hsize; 					// The transfer size set by HSIZE must be less than or equal to the width of the data bus.			
     rand bit [1:0]  htrans;  				// 00-IDLE / 01-BUSY / 10-NONSEQUENTAL / 11-SEQUENTAL
@@ -21,7 +21,7 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 	rand int 		blenght;
 	rand int		undefburst_lenght;
 	
-	rand bit [AHB_DW-1:0][blenght:0]  hwdata;   
+	rand bit [AHB_DW-1:0] [blenght-1] hwdata;   
 	
 	`uvm_object_param_utils_begin(ahb_tr)
 		`uvm_field_int (haddr, 			   UVM_ALL_ON)
@@ -52,14 +52,14 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 	}
 	
 	constraint blenght_c{
-		(hburst == 3'b000) -> blenght == 1; 
-		(hburst == 3'b001) -> blength == undefburst_lenght;		 		// "undefined" length INC burst
-		(hburst == 3'b010) -> blength == 4;		
-		(hburst == 3'b011) -> blength == 4;		
-		(hburst == 3'b100) -> blength == 8;		
-		(hburst == 3'b101) -> blength == 8;		
-		(hburst == 3'b110) -> blength == 16;
-		(hburst == 3'b111) -> blength == 16;		
+		hburst == 3'b000 -> blenght == 1; 
+		hburst == 3'b001 -> blength == undefburst_lenght;		 		// "undefined" length INC burst
+		hburst == 3'b010 -> blength == 4;		
+		hburst == 3'b011 -> blength == 4;		
+		hburst == 3'b100 -> blength == 8;		
+		hburst == 3'b101 -> blength == 8;		
+		hburst == 3'b110 -> blength == 16;
+		hburst == 3'b111 -> blength == 16;		
 	}
 	
 	constraint order_c {
@@ -70,13 +70,13 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
     }
 
 	constraint address_constraint {
-		(hsize == 3'b001) -> addr[0]   == 1'b0;
-		(hsize == 3'b010) -> addr[1:0] == 2'b0;
-		(hsize == 3'b011) -> addr[2:0] == 3'b0;
-		(hsize == 3'b100) -> addr[3:0] == 4'b0;
-		(hsize == 3'b101) -> addr[4:0] == 5'b0;
-		(hsize == 3'b110) -> addr[5:0] == 6'b0;
-		(hsize == 3'b111) -> addr[6:0] == 7'b0;
+		hsize == 3'b001 -> addr[0]   == 1'b0;
+		hsize == 3'b010 -> addr[1:0] == 2'b0;
+		hsize == 3'b011 -> addr[2:0] == 3'b0;
+		hsize == 3'b100 -> addr[3:0] == 4'b0;
+		hsize == 3'b101 -> addr[4:0] == 5'b0;
+		hsize == 3'b110 -> addr[5:0] == 6'b0;
+		hsize == 3'b111 -> addr[6:0] == 7'b0;
 	}
 
 	extern function new(string name = "ahb_tr");
