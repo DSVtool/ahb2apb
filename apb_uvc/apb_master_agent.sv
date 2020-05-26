@@ -19,7 +19,7 @@ class apb_master_agent #(parameter APB_DW = 32, APB_AW = 32) extends uvm_agent;
 
 	extern virtual function void build_phase(uvm_phase phase);
 	extern virtual function void connect_phase(uvm_phase phase);
-	extern virtual function void run_phase(uvm_phase phase);
+	extern virtual task run_phase(uvm_phase phase);
 
 endclass
 
@@ -54,8 +54,8 @@ function void apb_master_agent::connect_phase(uvm_phase phase);
 
 endfunction
 
-function void apb_master_agent::run_phase(uvm_phase phase);
+task apb_master_agent::run_phase(uvm_phase phase);
 	super.run_phase(phase);
-endfunction
+endtask
 
 `endif //APB_MASTER_AGENT

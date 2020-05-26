@@ -19,7 +19,7 @@ class ahb_master_agent #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_agent;
 
 	extern virtual function void build_phase(uvm_phase phase);
 	extern virtual function void connect_phase(uvm_phase phase);
-	extern virtual function void run_phase(uvm_phase phase);
+	extern virtual task run_phase(uvm_phase phase);
 
 endclass
 
@@ -51,7 +51,10 @@ function void ahb_master_agent::connect_phase(uvm_phase phase);
 		begin
 			drv.seq_item_port.connect(sqr.seq_item_export);
 		end
-
 endfunction
+
+task ahb_master_agent::run_phase(uvm_phase phase);
+	super.run_phase(phase);
+endtask
 
 `endif //AHB_MASTER_AGENT
