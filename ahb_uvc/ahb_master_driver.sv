@@ -183,7 +183,7 @@ task ahb_master_drv::drive();
 										
 										if(req.hwrite)												/*write transfers*/
 											begin
-												for(i=0,i<req.blenght,i++)
+												for(i=0;i<req.blenght;i++)
 													begin
 														if(i == 0)										//set state
 															`AHB_IF.htrans = 2'b10;
@@ -206,7 +206,7 @@ task ahb_master_drv::drive();
 											end	
 										else
 											begin													/*read transfers*/
-												for(i=0,i<req.blenght,i++)
+												for(i=0;i<req.blenght;i++)
 													begin
 														if(i == 0)										//set state
 															`AHB_IF.htrans = 2'b10;
@@ -236,7 +236,7 @@ task ahb_master_drv::drive();
 												
 										if(req.hwrite)												/*write transfers*/
 											begin
-												for(i=0,i<req.blenght,i++)
+												for(i=0;i<req.blenght;i++)
 													begin
 														if(i == 0)											//set state
 															`AHB_IF.htrans = 2'b10;
@@ -258,7 +258,7 @@ task ahb_master_drv::drive();
 											end		
 										else														/*read transfers*/
 											begin
-												for(i=0,i<req.blenght,i++)
+												for(i=0;i<req.blenght;i++)
 													begin
 														if(i == 0)										//set state
 															`AHB_IF.htrans = 2'b10;
