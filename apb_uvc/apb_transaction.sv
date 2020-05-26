@@ -1,11 +1,11 @@
-// File name: 			APB_Transaction.sv
+// File name: 			APB_Master_Agent.sv
 // Creator name: 		Dimitrije Selken
 // Current version: 	0.1
-// File description:    APB VIP module transaction
+// File description:    APB VIP module master agent
 // File history: 		0.1  - Dimitrije S. - Inital version.
 
-`ifndef АPB_TR
-`define АPB_TR
+`ifndef APB_TR
+`define APB_TR
 
 class apb_tr #(parameter APB_DW = 32, APB_AW = 32) extends uvm_sequence_item;
 
