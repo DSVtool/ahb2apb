@@ -66,7 +66,7 @@ function ahb2apb_scoreboard::wdata_compare();
 
 	if(ahbtrans.hsize > apb_width)
 		begin
-			arr_size = 8*2^ahbtrans.hsize; 
+			arr_size = 8*2**ahbtrans.hsize; 
 			data_buff = new[arr_size]; 
 			while (ahbtrans.htrans !== 2 && ahbtrans.htrans !== 1)
 				for (i=0; i < arr_size; i=+apb_width)
@@ -109,7 +109,7 @@ function ahb2apb_scoreboard::rdata_compare();
 
 	if(ahbtrans.hsize > apb_width)
 		begin
-			arr_size = 8*2^ahbtrans.hsize; 
+			arr_size = 8*2**ahbtrans.hsize; 
 			data_buff = new[arr_size]; 
 			while (ahbtrans.htrans !== 2 && ahbtrans.htrans !== 1)
 				for (i=0; i < arr_size; i=+apb_width)
