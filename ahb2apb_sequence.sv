@@ -11,26 +11,6 @@ class base_sequence extends uvm_sequence #(uvm_sequence_item);
 	`uvm_declare_p_sequencer(virtual_sequencer)
 endclass
 
-class virtual_sequence extends base_sequence;	
-
-	ahb_seq hseq;
-	apb_seq pseq;
-
-	virtual task body();
-
-		fork 
-			begin
-				`uvm_do(hseq);
-			end
-
-			begin
-				`uvm_do(pseq);
-			end
-		join	
-	endtask
-
-endclass
-
 class ahb_seq extends base_sequence;
 
 ahb_tr hseq;
@@ -51,6 +31,26 @@ ahb_tr pseq;
 
 	virtual task body();
 		`uvm_do_on(pseq, p_sequencer.apb_seq);
+	endtask
+
+endclass
+
+class virtual_sequence extends base_sequence;	
+
+	ahb_seq hseq;
+	apb_seq pseq;
+
+	virtual task body();
+
+		fork 
+			begin
+				`uvm_do(hseq);
+			end
+
+			begin
+				`uvm_do(pseq);
+			end
+		join	
 	endtask
 
 endclass

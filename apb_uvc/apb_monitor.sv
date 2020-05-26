@@ -78,7 +78,7 @@ task apb_monitor::main_task();
 		if(`APB_MON_IF.pready && `APB_MON_IF.penable)
 			@(posedge clk);
 				begin
-					trans = ahb_tr #(APB_DW,APB_AW)::type_id::create("trans");
+					trans = apb_tr #(APB_DW,APB_AW)::type_id::create("trans");
 					
 					trans.pwdata   = `APB_MON_IF.pwdata;
 					trans.prdata   = `APB_MON_IF.prdata;

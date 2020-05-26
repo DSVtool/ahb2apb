@@ -40,7 +40,7 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 		`uvm_field_array_int (hwdata, 	   UVM_ALL_ON)
 	`uvm_object_utils_end
 	    
-    /*constraint general_c {	
+    constraint general_c {	
     	hsize < $clog2(AHB_DW)-2;
 		tr_delay inside {[0:60]};
 		soft hsel == 1;
@@ -82,10 +82,10 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 
 	constraint default_dyn_arr {
 		hwdata.size() == max_length;	   
-	}*/
+	}
 
 	function void post_randomize();
-		hwdata = new[blength];
+		hwdata = new[blenght];
 	endfunction 
 
 	extern function new(string name = "ahb_tr");
