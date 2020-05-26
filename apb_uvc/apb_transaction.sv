@@ -18,7 +18,6 @@ class apb_tr #(parameter APB_DW = 32, APB_AW = 32) extends uvm_sequence_item;
     rand bit			  psel;
 	rand bit 			  pready;
 	rand int 			  ready_delay;											// Delay after which pready appears (simulating wait states)	
-	ETransPhase 		  transaction_phase; 
 
 	`uvm_object_param_utils_begin(apb_tr)
 		`uvm_field_int(paddr, 		 UVM_ALL_ON)
@@ -30,7 +29,6 @@ class apb_tr #(parameter APB_DW = 32, APB_AW = 32) extends uvm_sequence_item;
 		`uvm_field_int(pready,  	 UVM_ALL_ON)	
 		`uvm_field_int(psel,    	 UVM_ALL_ON)	
 		`uvm_field_int(ready_delay,  UVM_ALL_ON)				
-		`uvm_field_enum(ETransPhase, transaction_phase, UVM_ALL_ON);
 	`uvm_object_utils_end
     
     constraint general_c {	
