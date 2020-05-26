@@ -46,12 +46,12 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32)  extends uvm_sequence_item;
     constraint general_c {	
     	hsize < $clog2(AHB_DW)-2;
 		tr_delay inside {[0:60]};
-		soft hsel = 1;
+		soft hsel == 1;
 	}
 	
 	constraint undefburst_c {	
 		if( hburst !== 1)
-			undefburst_lenght = 0;
+			undefburst_lenght == 0;
 	}
 	
 	constraint blenght_c{
@@ -72,13 +72,13 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32)  extends uvm_sequence_item;
     }
 
 	constraint address_constraint {
-		(hsize = 3'b001) -> addr[0] = 1'b0;
-		(hsize = 3'b010) -> addr[1:0] = 2'b0;
-		(hsize = 3'b011) -> addr[2:0] = 3'b0;
-		(hsize = 3'b100) -> addr[3:0] = 4'b0;
-		(hsize = 3'b101) -> addr[4:0] = 5'b0;
-		(hsize = 3'b110) -> addr[5:0] = 6'b0;
-		(hsize = 3'b111) -> addr[6:0] = 7'b0;
+		(hsize == 3'b001) -> addr[0]   == 1'b0;
+		(hsize == 3'b010) -> addr[1:0] == 2'b0;
+		(hsize == 3'b011) -> addr[2:0] == 3'b0;
+		(hsize == 3'b100) -> addr[3:0] == 4'b0;
+		(hsize == 3'b101) -> addr[4:0] == 5'b0;
+		(hsize == 3'b110) -> addr[5:0] == 6'b0;
+		(hsize == 3'b111) -> addr[6:0] == 7'b0;
 	}
 
 	extern function new(string name = "ahb_tr");
