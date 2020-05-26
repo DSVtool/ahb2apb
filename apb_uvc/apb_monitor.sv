@@ -90,13 +90,13 @@ task apb_monitor::main_task();
 				begin
 					trans = ahb_tr #(APB_DW,APB_AW)::type_id::create("trans");
 					
-					trans.pwdata   = `AHB_MON_IF.pwdata;
-					trans.prdata   = `AHB_MON_IF.prdata;
-					trans.paddr    = `AHB_MON_IF.paddr;
-					trans.pwrite   = `AHB_MON_IF.pwrite;
-					trans.pstrobe  = `AHB_MON_IF.pstrobe;
-					trans.penable  = `AHB_MON_IF.penable;
-					trans.pready   = `AHB_MON_IF.pready;
+					trans.pwdata   = `APB_MON_IF.pwdata;
+					trans.prdata   = `APB_MON_IF.prdata;
+					trans.paddr    = `APB_MON_IF.paddr;
+					trans.pwrite   = `APB_MON_IF.pwrite;
+					trans.pstrobe  = `APB_MON_IF.pstrobe;
+					trans.penable  = `APB_MON_IF.penable;
+					trans.pready   = `APB_MON_IF.pready;
 						
 					default_ap.writep(trans);			
 				end			
