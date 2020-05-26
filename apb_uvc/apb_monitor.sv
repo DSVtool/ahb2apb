@@ -15,8 +15,6 @@ class apb_monitor #(parameter APB_DW = 32, APB_AW = 32) extends uvm_monitor;
 
 	uvm_analysis_port #(apb_tr #(APB_DW,APB_AW)) default_ap;
 
-	int tclk;
-
 	`uvm_component_param_utils(apb_monitor #(APB_DW,APB_AW))
 
 	extern function new(string name = "apb_monitor", uvm_component parent);
@@ -42,8 +40,6 @@ function void apb_monitor::build_phase(uvm_phase phase);
 		begin
 			`uvm_fatal("apb_monitor - build_phase", "vif not set!");
 		end
-
-	uvm_config_db#(int)::get(this, "", "clk_t", tclk);
 
 endfunction
 

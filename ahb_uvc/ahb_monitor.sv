@@ -14,8 +14,6 @@ class ahb_monitor #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_monitor;
 	virtual ahb_vif #(AHB_DW,AHB_AW) vif;
 
 	uvm_analysis_port #(ahb_tr #(AHB_DW,AHB_AW)) default_ap;
-
-	int tclk;
  
 	`uvm_component_param_utils(ahb_monitor #(AHB_DW,AHB_AW))
 
@@ -42,8 +40,6 @@ function void ahb_monitor::build_phase(uvm_phase phase);
 		begin
 			`uvm_fatal("ahb_monitor - build_phase", "vif not set!");
 		end
-
-	uvm_config_db#(int)::get(this, "", "clk_t", tclk);
 
 endfunction
 

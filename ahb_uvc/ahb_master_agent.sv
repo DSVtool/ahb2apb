@@ -31,6 +31,9 @@ function void ahb_master_agent::build_phase(uvm_phase phase);
 	super.build_phase(phase);
 
 	uvm_config_db#(uvm_active_passive_enum)::get(this, "", "is_active", is_active);
+		begin
+			`uvm_fatal("ahb_master_agent - build_phase", "uvm_active_passive not set");
+		end
 
 	`uvm_info("ahb_master_agent - build_phase", $psprintf("active passive enum val %s", is_active.name()), UVM_NONE);
 
