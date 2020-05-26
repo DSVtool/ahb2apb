@@ -4,7 +4,6 @@
 // File description:    AHB VIP module master agent
 // File history: 		0.1  - Dimitrije S. - Inital version.
 
-
 `ifndef AHB_MASTER_AGENT
 `define AHB_MASTER_AGENT
 

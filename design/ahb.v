@@ -25,37 +25,45 @@ module ahb
 	i_HADDR,			// AHB address		
 	o_HADDR,			// sampled address
 	i_HWRITE,			// AHB write/read
-	o_HWRITE,			// sampled write/read
+	//o_HWRITE,			// sampled write/read
 	i_HSIZE,			// AHB transfer size
 	o_HSIZE,			// sampled transfer size
 	o_HREADY,			// AHB ready out signal
 	i_HREADY,			// AHB ready in signal
 	i_HSEL,			        // AHB bridge select signal
 	o_start_read_transfer, 	        // read transaction indicator (start of the APB read transfer)
+        o_start_write_transfer,         // write transaction indicator
+        i_fifo_full,                    // FIFO full indicator
+        i_fifo_empty,                   // FIFO empty indicator
 	i_HRESP,			// AHB response signal
 	o_HRESP,			// AHB response signal output
-	i_HRDATA,				// AHB read data
+	i_HRDATA,		        // AHB read data
 	o_HRDATA			// AHB read data output
+        //i_HWDATA                        // AHB write data
 	
 	
 
 );
 
 /* Signals */
-input HCLK;
-input HRESETn;
-input [(AHB_AW-1):0] i_HADDR;
-input [2:0] i_HSIZE;
-input i_HWRITE;
-input i_HREADY;
-input i_HSEL;
-input [(AHB_DW-1):0] i_HRDATA;
-input i_HRESP;
+input                   HCLK;
+input                   HRESETn;
+input [(AHB_AW-1):0]    i_HADDR;
+input [2:0]             i_HSIZE;
+input                   i_HWRITE;
+input                   i_HREADY;
+input                   i_HSEL;
+input [(AHB_DW-1):0]    i_HRDATA;
+input                   i_HRESP;
+//input [AHB_DW - 1 : 0]  i_HWDATA;
+input                   i_fifo_full;
+input                   i_fifo_empty;
 
 output reg [(AHB_AW-1):0] o_HADDR;
 output reg [2:0] o_HSIZE;
-output reg o_HWRITE;
+//output reg o_HWRITE;
 output reg o_start_read_transfer;
+output reg o_start_write_transfer;
 output reg o_HREADY;
 output reg[(AHB_DW-1):0] o_HRDATA;
 output o_HRESP;
@@ -63,12 +71,13 @@ output o_HRESP;
 
 
 /* FSM registers and parameters */
-localparam
-AHB_IDLE = 1'b0,
-AHB_READ = 1'b1;
+localparam [1:0]
+AHB_IDLE = 2'b00,
+AHB_READ = 2'b01,
+AHB_WRITE = 2'b10;
 
-reg r_current_state;
-reg r_next_state;
+reg [1:0] r_current_state;
+reg [1:0] r_next_state;
 
 /* AHB state transition */
 always @ (posedge HCLK, negedge HRESETn)
@@ -87,16 +96,41 @@ begin
 	r_next_state = r_current_state;
 	case(r_current_state)
 		AHB_IDLE: begin
-			if(i_HSEL == 1'b1 && i_HWRITE == 1'b0) begin
-				r_next_state = AHB_READ;
+			if (i_HSEL == 1'b1) begin 
+				if (i_HWRITE == 1'b1) begin
+                                        r_next_state = AHB_WRITE;
+                                end else
+                                begin
+                                        r_next_state = AHB_READ;
+                                end
 			end
-		end
+                end
 		
 		AHB_READ: begin
-			if(i_HREADY == 1'b1) begin
-				r_next_state = AHB_IDLE;
+			if(i_HREADY == 1'b1 && i_fifo_empty == 1'b1) begin
+                                if (i_HSEL == 1'b1) begin
+                                        if (i_HWRITE == 1'b1) begin
+                                                r_next_state = AHB_WRITE;
+                                        end
+                                end else
+                                begin
+                                        r_next_state = AHB_IDLE;
+                                end
 			end
 		end
+                
+                AHB_WRITE: begin
+                        if (i_fifo_full == 1'b0) begin
+                                if (i_HSEL == 1'b0) begin
+                                        r_next_state = AHB_IDLE;
+                                end else
+                                begin
+                                        if (i_HWRITE == 1'b0) begin
+                                                r_next_state = AHB_READ;
+                                        end
+                                end
+                        end
+                end
 		
 		default: begin
 			r_next_state = AHB_IDLE;
@@ -111,12 +145,25 @@ begin
 		AHB_IDLE: begin
 			o_start_read_transfer = 1'b0;
 			o_HREADY = 1'b1;
+                        o_start_write_transfer = 1'b0;
 		end
 		
 		AHB_READ: begin
 			o_HREADY = 1'b0;
 			o_start_read_transfer = 1'b1;
+                        o_start_write_transfer = 1'b0;
 		end
+                
+                AHB_WRITE: begin
+                        o_start_read_transfer = 1'b0;
+                        o_start_write_transfer = 1'b1;
+                        if (i_fifo_full == 1'b1) begin
+                                o_HREADY = 1'b0;
+                        end else
+                        begin
+                                o_HREADY = 1'b1;
+                        end
+                end
 		
 		default: begin
 			o_start_read_transfer = 1'b0;
@@ -131,14 +178,19 @@ begin
         if(HRESETn == 1'b0) begin
 		o_HADDR <= 0;
 		o_HSIZE <= 0;
-		o_HWRITE <= 0;
+		//o_HWRITE <= 0;
 	end else
 	begin
-		if(i_HSEL == 1'b1 && o_HREADY == 1'b1 && i_HWRITE == 1'b0) begin
+		/* if(i_HSEL == 1'b1 && o_HREADY == 1'b1 && i_HWRITE == 1'b0) begin
 			o_HADDR <= i_HADDR;
 			o_HSIZE <= i_HSIZE;
 			o_HWRITE <= i_HWRITE;
-		end
+		end */
+                if (o_HREADY == 1'b1 && i_HSEL == 1'b1) begin
+                        o_HADDR <= i_HADDR;
+			o_HSIZE <= i_HSIZE;
+			//o_HWRITE <= i_HWRITE;
+                end
 	end
 end
 

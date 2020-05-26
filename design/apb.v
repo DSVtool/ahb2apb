@@ -25,21 +25,23 @@ module apb
         PRESETn,                // APB reset
         i_HADDR,                // AHB address
         i_HSIZE,                // AHB size
-        i_HWRITE,               // AHB write/read
-//        HRDATA,               // AHB ready signal
+        //i_HWRITE,               // AHB write/read
+        i_HWDATA,               // AHB write data
         o_HRESP,                // AHB response signal
         o_HREADY,               // AHB ready signal
         i_start_transfer,       // start of the APB transfer
         o_load,                 // load signal for HRDATA registers
+        i_fifo_empty,           // fifo empty indicator
         
         o_PADDR,                // APB address bus
         o_PSEL,                 // APB slave select signal
         o_PENABLE,              // APB enable signal
         o_PWRITE,               // APB write/read signal
-//      PWDATA,                 // APB write data
-        i_PRDATA,               // APB read data
+        o_PWDATA,               // APB write data
+        //i_PRDATA,               // APB read data
         i_PREADY,               // APB ready signal
         i_PSLVERR               // APB slave error signal
+        
         
         
 );
@@ -51,11 +53,13 @@ localparam logRATIO = clog2(RATIO);      // log2 RATIO
 
 /* Signals */
 /* AHB signals */
-input [(AHB_AW-1):0] i_HADDR;
-input [2:0] i_HSIZE;
-input i_HWRITE;
-input i_start_transfer;
+input [(AHB_AW-1):0]    i_HADDR;
+input [2:0]             i_HSIZE;
+//input                   i_HWRITE;
+input [AHB_DW - 1 : 0]  i_HWDATA;
+input                   i_start_transfer;
 output [RATIO - 1 : 0]  o_load;
+input                   i_fifo_empty;
 
 // output reg [(AHB_DW-1):0] HRDATA;
 output o_HREADY;
@@ -64,7 +68,7 @@ output o_HRESP;
 /* APB signals */
 input PCLK;
 input PRESETn;
-input [(APB_DW -1):0] i_PRDATA;
+//input [(APB_DW -1):0] i_PRDATA;
 input i_PREADY;
 input i_PSLVERR;
 
@@ -72,11 +76,12 @@ output reg[(APB_AW-1):0] o_PADDR;
 output reg o_PWRITE;
 output reg o_PSEL;
 output reg o_PENABLE;
+output [(APB_DW - 1) : 0] o_PWDATA;
 
 /* Local registers */
 reg [7:0] r_cnt;
 reg [7:0] r_hsize_byte_decoded;
-reg [(logRATIO - 1):0] o_load_sel;
+reg [(logRATIO - 1):0] r_load_sel;
 reg hready;
 
 
@@ -226,11 +231,12 @@ begin
         
         if(PRESETn == 1'b0) begin
                 r_cnt <= 0;
-                o_load_sel <= 0;
+                r_load_sel <= 0;
         end else
         begin
                 case(r_current_state) 
                         APB_IDLE: begin
+                                r_load_sel <= 0;
                                 if(r_hsize_byte_decoded > APB_DW_B) begin
                                         r_cnt <= r_hsize_byte_decoded;
                                 end else
@@ -245,7 +251,7 @@ begin
                         
                         APB_ACCESS: begin
                                 if (i_PREADY == 1'b1 && r_cnt > 0) begin
-                                        o_load_sel <= o_load_sel + 1'b1;
+                                        r_load_sel <= r_load_sel + 1'b1;
                                 end
                         end
                 endcase
@@ -254,7 +260,12 @@ end
 
 always @ (posedge PCLK)
 begin
-        o_PWRITE <= i_HWRITE;
+        if (i_fifo_empty == 1'b1) begin
+                o_PWRITE <= 1'b0;
+        end else
+        begin
+                o_PWRITE <= 1'b1;
+        end
 end
 
 /* Assigning APB address */
@@ -287,6 +298,24 @@ end
 
 assign o_HRESP = i_PSLVERR;
 
+generate
+        if(RATIO > 1) begin
+                hwdata_mux #(
+                        .AHB_DW(AHB_DW),
+                        .APB_DW(APB_DW),
+                        .RATIO(RATIO),
+                        .logRATIO(logRATIO)
+                )
+                HWDATA_MUX(
+                        .in(i_HWDATA),
+                        .sel(r_load_sel),
+                        .out(o_PWDATA)
+                );
+        end else
+        begin
+                assign o_PWDATA = i_HWDATA;
+        end
+endgenerate
 /* load demultiplexer */
 demux #(
         .RATIO(RATIO),
@@ -294,7 +323,7 @@ demux #(
 )
 load_demux(
         .i_load(i_PREADY),
-        .i_load_sel(o_load_sel),
+        .i_load_sel(r_load_sel),
         .o_load(o_load)
 );
 
