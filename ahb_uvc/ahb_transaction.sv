@@ -21,7 +21,7 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 	rand int 		blenght;
 	rand int		undefburst_lenght;
 	
-	rand bit [AHB_DW-1:0] [blenght-1] hwdata;   
+	rand bit [AHB_DW-1:0] [blenght-1:0] hwdata;   
 	
 	`uvm_object_param_utils_begin(ahb_tr)
 		`uvm_field_int (haddr, 			   UVM_ALL_ON)
