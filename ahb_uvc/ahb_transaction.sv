@@ -55,7 +55,7 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32)  extends uvm_sequence_item;
 	}
 	
 	constraint blenght_c{
-		(hburst == 3'b000) -> blenght == 1     	
+		(hburst == 3'b000) -> blenght == 1; 
 		(hburst == 3'b001) -> blength == undefburst_lenght;		 		// "undefined" length INC burst
 		(hburst == 3'b010) -> blength == 4;		
 		(hburst == 3'b011) -> blength == 4;		
