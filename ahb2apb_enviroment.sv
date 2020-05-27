@@ -11,7 +11,7 @@ class ahb2apb_env extends uvm_env;
 
 	ahb_master_agent	#(`AHB_BUS_W,`AHB_ADDR_W) 	  	ahb_agnt;
 	apb_master_agent 	#(`APB_BUS_W,`APB_ADDR_W) 	  	apb_agnt;
-	ahb2apb_scoreboard  				  				scrboard;
+	ahb2apb_scoreboard  				  				scbd;
 	virtual_sequencer 					  				vseq;
 	
 	`uvm_component_utils(ahb2apb_env)  
@@ -37,7 +37,7 @@ function void ahb2apb_env::build_phase(uvm_phase phase);
 		uvm_config_db#(uvm_active_passive_enum)::set(this, ".apb_agent", "is_active", UVM_ACTIVE);
 		
 		vseq = virtual_sequencer::type_id::create("vseq", this);
-		scrboard = ahb2apb_scoreboard::type_id::create("scrboard", this);
+		scbd = ahb2apb_scoreboard::type_id::create("scbd", this);
 
 		/* setting the current bridge model parameters */
 		uvm_config_db#(int)::set(this, ".ahb_agent.*", "buswidth", 32);    						// Data ahb write bus width set at 32b
@@ -47,11 +47,11 @@ endfunction
 
 function void ahb2apb_env::connect_phase(uvm_phase phase);	
 	super.connect_phase(phase);
-		vseq.ahb_sqr.connect(ahb_agnt.sqr); 	
-		vseq.apb_sqr.connect(apb_agnt.sqr);
+		vseq.ahb_sqr = ahb_agnt.sqr; 	
+		vseq.apb_sqr = apb_agnt.sqr;
 
-		ahb_agnt.mon.default_ap.connect(scrboard.my_import);
-		apb_agnt.mon.default_ap.connect(scrboard.my_import);
+		ahb_agnt.mon.default_ap.connect(scbd.ahb_export);
+		apb_agnt.mon.default_ap.connect(scbd.apb_export);
 
 endfunction
 
