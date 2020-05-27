@@ -81,32 +81,35 @@ task ahb_monitor::main_task();
 		@(`AHB_MON_IF);
 		begin	
 			while(trans_flag2 !== 2)
-				if(`AHB_MON_IF.hready == 1)
-					begin
-						@(posedge vif.clk) 	
-							
-							trans = ahb_tr #(AHB_DW,AHB_AW)::type_id::create("trans");
+				begin
+					if(`AHB_MON_IF.hready == 1)
+						begin
+							@(posedge vif.clk) 	
+								
+								trans = ahb_tr #(AHB_DW,AHB_AW)::type_id::create("trans");
 
-							trans_flag2	   = trans_flag + 1;   																					
+								trans_flag2	   = trans_flag + 1;   																					
 
-							trans.hwdata   = `AHB_MON_IF.hwdata;
-							trans.hrdata   = `AHB_MON_IF.hrdata;
-							trans.haddr    = `AHB_MON_IF.haddr;
-							trans.hwrite   = `AHB_MON_IF.hwrite;
-							trans.hburst   = `AHB_MON_IF.hburst;
-							trans.hsize	   = `AHB_MON_IF.hsize;
-							trans.htrans   = `AHB_MON_IF.htrans;
-							
-							trans_prev     = trans_curr;
-							trans_curr	   = `AHB_MON_IF.htrans;
+								trans.hwdata[i] = `AHB_MON_IF.hwdata;
+								trans.hrdata    = `AHB_MON_IF.hrdata;
+								trans.haddr     = `AHB_MON_IF.haddr;
+								trans.hwrite    = `AHB_MON_IF.hwrite;
+								trans.hburst    = `AHB_MON_IF.hburst;
+								trans.hsize	    = `AHB_MON_IF.hsize;
+								trans.htrans    = `AHB_MON_IF.htrans;
+								
+								trans_prev      = trans_curr;
+								trans_curr	    = `AHB_MON_IF.htrans;
 
-							i++;
+								i++;
 
-							if(trans_prev == 3 && (trans_curr == 0 || trans_curr == 2))
-								trans_flag = 1;
+								if(trans_prev == 3 && (trans_curr == 0 || trans_curr == 2))
+									trans_flag = 1;
 
-							default_ap.write(trans);													// writing to the analysis port
-					end	
+								default_ap.write(trans);													// writing to the analysis port
+						end	
+				end		
+			i=0;	
 		end				
 	end	
 endtask
