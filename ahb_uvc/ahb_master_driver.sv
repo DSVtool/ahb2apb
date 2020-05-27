@@ -118,7 +118,6 @@ task ahb_master_drv::drive();
 												if(`AHB_IF.hready)
 													ready_flag = 1;
 											end			
-										`AHB_IF.hrdata <= req.hrdata;
 									end
 							end
 													
@@ -160,7 +159,6 @@ task ahb_master_drv::drive();
 														else
 															`AHB_IF.htrans <= 2'b01;	
 													end			
-												`AHB_IF.hrdata <= req.hrdata;
 												haddr_temp = `AHB_IF.haddr + 2**`AHB_IF.hsize; 					
 												`AHB_IF.haddr <= haddr_temp;							//Set next cycles address
 											end	
@@ -217,7 +215,6 @@ task ahb_master_drv::drive();
 																		else
 																			`AHB_IF.htrans <= 2'b01;	
 																	end			
-																`AHB_IF.hrdata <= req.hrdata;	
 																if(`AHB_IF.haddr == wrap_max)					//Set next cycles address
 																	`AHB_IF.haddr <= wrap_min;		
 																else
@@ -273,7 +270,6 @@ task ahb_master_drv::drive();
 																		else
 																			`AHB_IF.htrans <= 2'b01;				//Busy state
 																	end			
-																`AHB_IF.hrdata <= req.hrdata;	
 																haddr_temp = `AHB_IF.haddr + 2**`AHB_IF.hsize; 					
 																`AHB_IF.haddr <= haddr_temp;
 															end
