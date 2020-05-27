@@ -35,39 +35,39 @@ module ahb2apb_testbench;
 
 	ahb_to_apb_bridge DUT(
 
-		.HCLK(ifahbagnt.clk),
-		.PCLK(ifapbagnt.clk),
-		.HRESETn(ifahbagnt.reset_n),
-		.PRESETn(ifapbagnt.reset_n),
-		.HADDR(ifahbagnt.haddr),
-        .HSIZE(ifahbagnt.hsize),      
-        .HWDATA(ifahbagnt.hwdata),     
-        .HWRITE(ifahbagnt.hwrite),     
-        .HRDATA(ifahbagnt.hrdata),     
-        .HREADY(ifahbagnt.hready),     
-        .HRESP(ifahbagnt.hresp),      
-        .HSELAPB(ifahbagnt.hsel),     
-        .PADDR(ifapbagnt.paddr),     
-        .PSEL(ifapbagnt.psel),       
-        .PENABLE(ifapbagnt.penable),    
-        .PWRITE(ifapbagnt.pwrite),     
-        .PWDATA(ifapbagnt.pwdata),     
-        .PRDATA(ifapbagnt.prdata),    
-        .PREADY(ifapbagnt.pready),    
-        .PSLVERR(ifapbagnt.pslverr)     
+		.HCLK(ahb_vif.clk),
+		.PCLK(apb_vif.clk),
+		.HRESETn(ahb_vif.reset_n),
+		.PRESETn(apb_vif.reset_n),
+		.HADDR(ahb_vif.haddr),
+        .HSIZE(ahb_vif.hsize),      
+        .HWDATA(ahb_vif.hwdata),     
+        .HWRITE(ahb_vif.hwrite),     
+        .HRDATA(ahb_vif.hrdata),     
+        .HREADY(ahb_vif.hready),     
+        .HRESP(ahb_vif.hresp),      
+        .HSELAPB(ahb_vif.hsel),     
+        .PADDR(apb_vif.paddr),     
+        .PSEL(apb_vif.psel),       
+        .PENABLE(apb_vif.penable),    
+        .PWRITE(apb_vif.pwrite),     
+        .PWDATA(apb_vif.pwdata),     
+        .PRDATA(apb_vif.prdata),    
+        .PREADY(apb_vif.pready),    
+        .PSLVERR(apb_vif.pslverr)     
         
 	); 
 
 	initial begin
-   		uvm_config_db#(virtual ahb_vif)::set(uvm_root::get(), "apb_agnt.*", "vif", ifahbagnt);
-		uvm_config_db#(virtual apb_vif)::set(uvm_root::get(), "apb_agnt.*", "vif", ifapbagnt);
+   		uvm_config_db#(virtual ahb_vif)::set(uvm_root::get(), "apb_agnt.*", "vif", ahb_vif);
+		uvm_config_db#(virtual apb_vif)::set(uvm_root::get(), "apb_agnt.*", "vif", apb_vif);
 
     	$dumpfile("dump.vcd"); 
     	$dumpvars;
   	end
    
   	initial begin
-   		run_test();
+   		run_test("ahb2apb_test");
  	end
 
 
