@@ -84,6 +84,9 @@ task apb_master_drv::drive();
 	bit enable_flag;
 
 	@(`APB_IF)
+
+	`APB_IF.psel = req.psel;
+
 	 
 	@(posedge vif.clk);
 		begin
@@ -95,23 +98,19 @@ task apb_master_drv::drive();
 							if(`APB_IF.penable)
 								enable_flag = 1;
 						end
-				if(`APB_IF.pwrite) 															//write transfer
-					begin
-						#(`APB_IF.ready_delay*1ns);
-						@(posedge vif.clk);
-						`APB_IF.pready = 0;		
-					end
-				else	
-					begin		
-						`APB_IF.prdata = req.prdata;
-						#(`APB_IF.ready_delay*1ns);											//read transfer
-						@(posedge vif.clk);
-						`APB_IF.pready = 0;	
-					end	
-				end	
-			else
-				begin
-					break;	
+					if(`APB_IF.pwrite) 														//write transfer
+						begin
+							#(req.ready_delay*1ns);
+							@(posedge vif.clk);
+							`APB_IF.pready = 0;		
+						end
+					else	
+						begin		
+							`APB_IF.prdata = req.prdata;									//read transfer
+							#(req.ready_delay*1ns);											    
+							@(posedge vif.clk);
+							`APB_IF.pready = 0;	
+						end	
 				end			
 		end
 endtask
