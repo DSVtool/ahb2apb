@@ -74,7 +74,7 @@ endtask
 
 function ahb_master_drv::init();
 	
-	//`AHB_IF.haddr     <= 31'b0;						//PARAMETRIZOVATI
+	//`AHB_IF.haddr     <= 31'b0;
 	//`AHB_IF.hwdata    <= 31'b0;
 	`AHB_IF.hburst    <= 3'b0;
 	`AHB_IF.hsize     <= 3'b0;																	
