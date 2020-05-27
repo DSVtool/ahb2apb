@@ -73,7 +73,11 @@ task ahb_master_drv::run_phase(uvm_phase phase);
 endtask
 
 function ahb_master_drv::init();
-	//to do
+	`AHB_IF.haddr     <= 32'b0;
+	`AHB_IF.hwdata    <= 32'b0;
+	`AHB_IF.hburst    <= 3'b0;
+	`AHB_IF.hsize     <= 3'b0;																	
+	`AHB_IF.hwrite    <= 1'b0;
 endfunction
 
 task ahb_master_drv::drive();
