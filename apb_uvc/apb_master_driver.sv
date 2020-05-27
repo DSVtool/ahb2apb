@@ -74,8 +74,8 @@ endtask
 
 function apb_master_drv::init();
 	
-	`APB_IF.pready = 1'b0;
-	`APB_IF.prdata = 31'b0;
+	`APB_IF.pready <= 1'b0;
+	`APB_IF.prdata <= 31'b0;
 	
 endfunction
 

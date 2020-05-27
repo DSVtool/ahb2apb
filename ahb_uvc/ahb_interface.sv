@@ -27,6 +27,7 @@ interface ahb_vif #(parameter AHB_DW = 32, AHB_AW = 32) (input bit clk, input bi
 		output hsize; 		
 		output hwrite;
 		output htrans;
+		input  hrdata;
 		input  hready;	
 		input  hrdata;	
 		//input  hresp;				
@@ -34,6 +35,7 @@ interface ahb_vif #(parameter AHB_DW = 32, AHB_AW = 32) (input bit clk, input bi
 	endclocking
 	
 	clocking mon_cb @(posedge clk);
+		input hrdata;
 		input haddr;
 		input hwdata;
 		input hburst;
