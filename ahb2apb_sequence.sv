@@ -8,6 +8,7 @@
 `define AHB2APB_SQC
 
 class base_sequence extends uvm_sequence #(uvm_sequence_item);
+	`uvm_object_utils(base_sequence)
 	`uvm_declare_p_sequencer(virtual_sequencer)
 endclass
 
@@ -36,6 +37,8 @@ ahb_tr pseq;
 endclass
 
 class virtual_sequence extends base_sequence;	
+
+	`uvm_object_utils(virtual_sequence)
 
 	ahb_seq hseq;
 	apb_seq pseq;
