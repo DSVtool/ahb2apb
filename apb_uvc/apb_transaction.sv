@@ -7,11 +7,11 @@
 `ifndef APB_TR
 `define APB_TR
 
-class apb_tr #(parameter APB_DW = 32, APB_AW = 32) extends uvm_sequence_item;
+class apb_tr #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) extends uvm_sequence_item;
 
-	 	 bit [APB_AW-1:0] paddr;
-		 bit [APB_DW-1:0] pwdata;
-	rand bit [APB_DW-1:0] prdata;	
+	 	 bit [APB_ADDR_W-1:0] paddr;
+		 bit [APB_BUS_W-1:0] pwdata;
+	rand bit [APB_BUS_W-1:0] prdata;	
     	 bit 			  penable;
      	 bit 			  pwrite;				
     //rand bit 			  pstrobe;

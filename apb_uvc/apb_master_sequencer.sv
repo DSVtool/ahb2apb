@@ -9,11 +9,11 @@
 
 `define APB_IF vif.clk_cb				
 
-class apb_master_sqr #(parameter APB_DW = 32, APB_AW = 32) extends uvm_sequencer #(apb_tr);
+class apb_master_sqr #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) extends uvm_sequencer #(apb_tr);
 
-	virtual apb_vif #(APB_DW,APB_AW) vif;
+	virtual apb_vif #(APB_BUS_W,APB_ADDR_W) vif;
 
-	`uvm_component_param_utils(apb_master_sqr #(APB_DW,APB_AW))
+	`uvm_component_param_utils(apb_master_sqr #(APB_BUS_W,APB_ADDR_W))
 
 	extern function new(string name = "apb_master_sqr", uvm_component parent = null);
 
@@ -29,7 +29,7 @@ endfunction
 function void apb_master_sqr::build_phase(uvm_phase phase);
 	super.build_phase(phase);
 
-	if(!uvm_config_db#(virtual apb_vif #(APB_DW,APB_AW))::get(this, "", "vif", vif))
+	if(!uvm_config_db#(virtual apb_vif #(APB_BUS_W,APB_ADDR_W))::get(this, "", "vif", vif))
 		begin
 			`uvm_fatal("apb_master_sqr - build_phase", "vif not set!");
 		end

@@ -7,12 +7,12 @@
 `ifndef AHB_TR
 `define AHB_TR
 
-class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
+class ahb_tr #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_sequence_item;
 
     int max_length = 50;  					// max "undefined length" for allocating a dynamic array
 
-	rand bit [AHB_AW-1:0] haddr;			// All transfers in a burst must be aligned to the address boundary equal to the size of the transfer. Page34
-		 bit [AHB_DW-1:0] hrdata;	
+	rand bit [AHB_ADDR_W-1:0] haddr;			// All transfers in a burst must be aligned to the address boundary equal to the size of the transfer. Page34
+		 bit [AHB_BUS_W-1:0] hrdata;	
     rand bit [2:0]  hburst;
     rand bit [2:0]  hsize; 					// The transfer size set by HSIZE must be less than or equal to the width of the data bus.			
     rand bit [1:0]  htrans;  				// 00-IDLE / 01-BUSY / 10-NONSEQUENTAL / 11-SEQUENTAL
@@ -23,7 +23,7 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 	rand int 		blenght;
 	rand int		undefburst_lenght;
 	
-	rand bit [AHB_DW-1:0] hwdata [];   
+	rand bit [AHB_BUS_W-1:0] hwdata [];   
 	
 	`uvm_object_param_utils_begin(ahb_tr)
 		`uvm_field_int (haddr, 			   UVM_ALL_ON)
@@ -41,7 +41,7 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 	`uvm_object_utils_end
 	    
     constraint general_c {	
-    	hsize < $clog2(AHB_DW)-2;
+    	hsize < $clog2(AHB_BUS_W)-2;
 		tr_delay inside {[0:60]};
 		soft hsel == 1;
 	}

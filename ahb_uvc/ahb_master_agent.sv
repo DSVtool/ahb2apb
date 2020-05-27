@@ -7,13 +7,13 @@
 `ifndef AHB_MASTER_AGENT
 `define AHB_MASTER_AGENT
 
-class ahb_master_agent #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_agent;
+class ahb_master_agent #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_agent;
 
-	`uvm_component_param_utils(ahb_master_agent #(AHB_DW,AHB_AW))
+	`uvm_component_param_utils(ahb_master_agent #(AHB_BUS_W,AHB_ADDR_W))
 
-	ahb_master_drv #(AHB_DW,AHB_AW)  		drv;
-	ahb_master_sqr #(AHB_DW,AHB_AW)  		sqr;
-	ahb_monitor    #(AHB_DW,AHB_AW)			mon;
+	ahb_master_drv #(AHB_BUS_W,AHB_ADDR_W)  		drv;
+	ahb_master_sqr #(AHB_BUS_W,AHB_ADDR_W)  		sqr;
+	ahb_monitor    #(AHB_BUS_W,AHB_ADDR_W)			mon;
 
 	extern function new(string name = "ahb_master_agent", uvm_component parent = null);
 
@@ -39,11 +39,11 @@ function void ahb_master_agent::build_phase(uvm_phase phase);
 
 	if(get_is_active() == UVM_ACTIVE)
 		begin
-			drv = ahb_master_drv #(AHB_DW,AHB_AW) ::type_id::create("drv", this);
-			sqr = ahb_master_sqr #(AHB_DW,AHB_AW) ::type_id::create("sqr", this);			
+			drv = ahb_master_drv #(AHB_BUS_W,AHB_ADDR_W) ::type_id::create("drv", this);
+			sqr = ahb_master_sqr #(AHB_BUS_W,AHB_ADDR_W) ::type_id::create("sqr", this);			
 		end
 
-	mon = ahb_monitor #(AHB_DW,AHB_AW) ::type_id::create("mon", this);
+	mon = ahb_monitor #(AHB_BUS_W,AHB_ADDR_W) ::type_id::create("mon", this);
 
 endfunction
 

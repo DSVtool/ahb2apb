@@ -9,13 +9,13 @@
 
 `define AHB_MON_IF vif.mon_cb
 
-class ahb_monitor #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_monitor;
+class ahb_monitor #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_monitor;
 
-	virtual ahb_vif #(AHB_DW,AHB_AW) vif;
+	virtual ahb_vif #(AHB_BUS_W,AHB_ADDR_W) vif;
 
-	uvm_analysis_port #(ahb_tr #(AHB_DW,AHB_AW)) default_ap;
+	uvm_analysis_port #(ahb_tr #(AHB_BUS_W,AHB_ADDR_W)) default_ap;
  
-	`uvm_component_param_utils(ahb_monitor #(AHB_DW,AHB_AW))
+	`uvm_component_param_utils(ahb_monitor #(AHB_BUS_W,AHB_ADDR_W))
 
 	extern function new(string name = "ahb_monitor", uvm_component parent);
 
@@ -36,7 +36,7 @@ function void ahb_monitor::build_phase(uvm_phase phase);
 
 	default_ap = new("default_ap", this);
 
-	if(!uvm_config_db#(virtual ahb_vif #(AHB_DW,AHB_AW))::get(this, "", "vif", vif))
+	if(!uvm_config_db#(virtual ahb_vif #(AHB_BUS_W,AHB_ADDR_W))::get(this, "", "vif", vif))
 		begin
 			`uvm_fatal("ahb_monitor - build_phase", "vif not set!");
 		end
@@ -70,7 +70,7 @@ endtask
 
 task ahb_monitor::main_task();			
 	
-	ahb_tr #(AHB_DW,AHB_AW) trans;
+	ahb_tr #(AHB_BUS_W,AHB_ADDR_W) trans;
 	int i = 0;
 	int trans_prev,trans_curr;
 	int trans_flag = 0, trans_flag2 = 1;
@@ -86,7 +86,7 @@ task ahb_monitor::main_task();
 						begin
 							@(posedge vif.clk) 	
 								
-								trans = ahb_tr #(AHB_DW,AHB_AW)::type_id::create("trans");
+								trans = ahb_tr #(AHB_BUS_W,AHB_ADDR_W)::type_id::create("trans");
 
 								trans_flag2	   = trans_flag + 1;   																					
 

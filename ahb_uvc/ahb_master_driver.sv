@@ -9,11 +9,11 @@
 
 `define AHB_IF vif.mst_cb				
 
-class ahb_master_drv #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_driver #(ahb_tr #(AHB_DW,AHB_AW));
+class ahb_master_drv #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_driver #(ahb_tr #(AHB_BUS_W,AHB_ADDR_W));
 
-	virtual ahb_vif #(AHB_DW,AHB_AW)  vif;
+	virtual ahb_vif #(AHB_BUS_W,AHB_ADDR_W)  vif;
 
-	`uvm_component_param_utils(ahb_master_drv #(AHB_DW,AHB_AW)) 
+	`uvm_component_param_utils(ahb_master_drv #(AHB_BUS_W,AHB_ADDR_W)) 
 
 	extern function new(string name = "ahb_master_drv", uvm_component parent);
 	
@@ -32,7 +32,7 @@ endfunction
 function void ahb_master_drv::build_phase(uvm_phase phase);
 	super.build_phase(phase);
 
-	if(!uvm_config_db#(virtual ahb_vif #(AHB_DW,AHB_AW))::get(this, "", "vif", vif))
+	if(!uvm_config_db#(virtual ahb_vif #(AHB_BUS_W,AHB_ADDR_W))::get(this, "", "vif", vif))
 		begin
 			`uvm_fatal("ahb_master_drv - build_phase", "vif not set!");
 		end
