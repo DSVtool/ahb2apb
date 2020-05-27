@@ -45,7 +45,7 @@ module ahb2apb_testbench;
         .HWRITE(ahb_vif.hwrite),     
         .HRDATA(ahb_vif.hrdata),     
         .HREADY(ahb_vif.hready),     
-        .HRESP(ahb_vif.hresp),      
+        //.HRESP(ahb_vif.hresp),      
         .HSELAPB(ahb_vif.hsel),     
         .PADDR(apb_vif.paddr),     
         .PSEL(apb_vif.psel),       
@@ -54,7 +54,7 @@ module ahb2apb_testbench;
         .PWDATA(apb_vif.pwdata),     
         .PRDATA(apb_vif.prdata),    
         .PREADY(apb_vif.pready),    
-        .PSLVERR(apb_vif.pslverr)     
+        //.PSLVERR(apb_vif.pslverr)     
         
 	); 
 

@@ -17,6 +17,7 @@ interface ahb_vif #(parameter AHB_DW = 32, AHB_AW = 32) (input bit clk, input bi
     logic [0:0]	 hwrite;
     logic [0:0]  hready;
     logic [1:0]  htrans;
+    logic [0:0]	 hsel;
 	//logic [0:0]  hresp;				
     //logic [0:0]  hexokay;
 	
@@ -27,6 +28,7 @@ interface ahb_vif #(parameter AHB_DW = 32, AHB_AW = 32) (input bit clk, input bi
 		output hsize; 		
 		output hwrite;
 		output htrans;
+		output hsel;
 		input  hrdata;
 		input  hready;	
 		//input  hresp;				
@@ -42,6 +44,7 @@ interface ahb_vif #(parameter AHB_DW = 32, AHB_AW = 32) (input bit clk, input bi
 		input hready;
 		input hrdata;	
 		input htrans;
+		inpit hsel;
 		//input hresp;				
 		//input hexokay;
 	endclocking

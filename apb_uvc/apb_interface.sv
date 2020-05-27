@@ -9,9 +9,9 @@
   
 interface apb_vif #(parameter APB_DW = 32, APB_AW = 32) (input bit clk, input bit reset_n);
 
-	logic [APB_AW:0] paddr;
-	logic [APB_DW:0] pwdata;
-	logic [APB_DW:0] prdata;	 		
+	logic [APB_AW-1:0] paddr;
+	logic [APB_DW-1:0] pwdata;
+	logic [APB_DW-1:0] prdata;	 		
     logic [0:0]		 pwrite;
     logic [0:0]  	 penable;
     //logic [0:0]  	 pstrobe;	
