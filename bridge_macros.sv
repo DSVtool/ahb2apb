@@ -6,5 +6,5 @@
 
 	`define AHB_BUS_W  32
 	`define AHB_ADDR_W 32
-	`define APB_BUS_W  32
+	`define APB_BUS_W  8
 	`define APB_ADDR_W 32

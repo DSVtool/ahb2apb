@@ -36,9 +36,9 @@ module ahb2apb_testbench;
 	ahb_to_apb_bridge DUT(
 
 		.HCLK(ahb_vif.clk),
-		.PCLK(apb_vif.clk),
+		//.PCLK(apb_vif.clk),
 		.HRESETn(ahb_vif.reset_n),
-		.PRESETn(apb_vif.reset_n),
+		//.PRESETn(apb_vif.reset_n),
 		.HADDR(ahb_vif.haddr),
         .HSIZE(ahb_vif.hsize),      
         .HWDATA(ahb_vif.hwdata),     
