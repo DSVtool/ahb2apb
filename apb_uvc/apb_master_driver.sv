@@ -86,7 +86,6 @@ task apb_master_drv::drive();
 	@(`APB_IF)
 
 	`APB_IF.psel = req.psel;
-
 	 
 	@(posedge vif.clk);
 		begin
