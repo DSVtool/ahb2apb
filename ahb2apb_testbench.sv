@@ -53,10 +53,9 @@ module ahb2apb_testbench;
         .PWRITE(apb_vif.pwrite),     
         .PWDATA(apb_vif.pwdata),     
         .PRDATA(apb_vif.prdata),    
-        .PREADY(apb_vif.pready),    
+        .PREADY(apb_vif.pready)    
         //.PSLVERR(apb_vif.pslverr)     
-        
-	); 
+    ); 
 
 	initial begin
    		uvm_config_db#(virtual ahb_vif)::set(uvm_root::get(), "apb_agnt.*", "vif", ahb_vif);
