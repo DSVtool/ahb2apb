@@ -9,6 +9,8 @@
 
 class virtual_sequencer extends uvm_sequencer#(uvm_sequence_item);
 
+	`uvm_component_utils(virtual_sequencer)
+
 	ahb_master_sqr #(`AHB_BUS_W,`AHB_ADDR_W)	ahb_sqr;
 	apb_master_sqr #(`APB_BUS_W,`APB_ADDR_W) 	apb_sqr;
 	
