@@ -171,7 +171,7 @@ task ahb_master_drv::drive();
 												`AHB_IF.haddr <= req.haddr;
 												`AHB_IF.hwrite <= req.hwrite;	
 												haddr_temp = req.haddr;								
-					    /*postoji li INT()*/	wrap_min = (/*?INT?*/haddr_temp/(2**req.hsize*req.blenght)))*(2**req.hsize*req.blenght);
+					    /*postoji li INT()*/	wrap_min = (/*?INT?*/haddr_temp/(2**req.hsize*req.blenght))*(2**req.hsize*req.blenght);
 												wrap_max = wrap_min + (2**req.hsize*req.blenght);
 												
 												if(req.hwrite)												/*write transfers*/
