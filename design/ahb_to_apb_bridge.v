@@ -13,6 +13,7 @@ Version history:
 0.1     Vuk Popovic     05/13/2020      Initial version
 */
 
+
 module ahb_to_apb_bridge
 #(
         parameter AHB_AW = 32,

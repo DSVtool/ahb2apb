@@ -12,6 +12,7 @@ Relevant documents:
 Version history:
 0.1     Vuk Popovic     05/13/2020      Initial version
 */
+
 module data_reg #(
         parameter APB_DW = 8
 )

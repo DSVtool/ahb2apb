@@ -1,3 +1,4 @@
+
 module internal_logic #(
         parameter AHB_AW = 32,
         parameter AHB_DW = 32

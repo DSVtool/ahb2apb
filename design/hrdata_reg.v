@@ -13,6 +13,7 @@ Version history:
 0.1     Vuk Popovic     05/13/2020      Initial version
 */
 
+
 module hrdata_reg  #(
         parameter AHB_DW = 32,
         parameter APB_DW = 8
