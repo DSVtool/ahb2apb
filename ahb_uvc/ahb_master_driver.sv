@@ -73,9 +73,7 @@ task ahb_master_drv::run_phase(uvm_phase phase);
 endtask
 
 function ahb_master_drv::init();
-	
-	//add later
-	
+	//to do
 endfunction
 
 task ahb_master_drv::drive();
