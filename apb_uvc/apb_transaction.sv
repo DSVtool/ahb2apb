@@ -1,7 +1,7 @@
-// File name: 			APB_Master_Agent.sv
+// File name: 			apb_transaction.sv
 // Creator name: 		Dimitrije Selken
 // Current version: 	0.1
-// File description:    APB VIP module master agent
+// File description:    APB VIP module transaction
 // File history: 		0.1  - Dimitrije S. - Inital version.
 
 `ifndef APB_TR

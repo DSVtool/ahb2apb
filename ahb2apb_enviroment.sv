@@ -10,7 +10,7 @@
 class ahb2apb_env extends uvm_env;
 
 	ahb_master_agent	#(`AHB_BUS_W,`AHB_ADDR_W) 	  	ahb_agnt;
-	apb_master_agent 	#(`APB_BUS_W,`APB_ADDR_W) 	  	apb_agnt;
+	apb_slave_agent 	#(`APB_BUS_W,`APB_ADDR_W) 	  	apb_agnt;
 	ahb2apb_scoreboard  				  				scbd;
 	virtual_sequencer 					  				vseqr;
 	
@@ -30,7 +30,7 @@ function void ahb2apb_env::build_phase(uvm_phase phase);
 	super.build_phase(phase);
 
 		ahb_agnt = ahb_master_agent#(`AHB_BUS_W,`AHB_ADDR_W)::type_id::create("ahb_agnt", this);
-		apb_agnt = apb_master_agent#(`APB_BUS_W,`APB_ADDR_W)::type_id::create("apb_agnt", this);
+		apb_agnt = apb_slave_agent#(`APB_BUS_W,`APB_ADDR_W)::type_id::create("apb_agnt", this);
 
 		/* setting both agents to be active */
 		uvm_config_db#(uvm_active_passive_enum)::set(this, ".ahb_agent", "is_active", UVM_ACTIVE);
