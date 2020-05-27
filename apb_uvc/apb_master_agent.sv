@@ -13,7 +13,7 @@ class apb_master_agent #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) extends uvm_
 
 	apb_master_drv #(APB_BUS_W,APB_ADDR_W) 		drv;
 	apb_master_sqr #(APB_BUS_W,APB_ADDR_W) 		sqr;
-	apb_monitor    #(APB_BUS_W,APB_ADDR_W)			mon;
+	apb_monitor    #(APB_BUS_W,APB_ADDR_W)		mon;
 
 	extern function new(string name = "apb_master_agent", uvm_component parent = null);
 

@@ -19,7 +19,7 @@ ahb_tr hseq;
 	`uvm_object_utils(ahb_seq)
 
 	virtual task body();
-		`uvm_do_on(hseq, p_sequencer.ahb_seq);
+		`uvm_do_on(hseq, p_sequencer.ahb_sqr);
 	endtask
 
 endclass
@@ -31,7 +31,7 @@ ahb_tr pseq;
 	`uvm_object_utils(apb_seq)
 
 	virtual task body();
-		`uvm_do_on(pseq, p_sequencer.apb_seq);
+		`uvm_do_on(pseq, p_sequencer.apb_sqr);
 	endtask
 
 endclass
