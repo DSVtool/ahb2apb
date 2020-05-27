@@ -21,4 +21,5 @@ function virtual_sequencer::new(string name = "virtual_sequencer", uvm_component
 	super.new(name, parent);
 endfunction
 
+
 `endif //AHB2APB_VR_SQCR

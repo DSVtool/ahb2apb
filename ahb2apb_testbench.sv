@@ -69,6 +69,4 @@ module ahb2apb_testbench;
    		run_test("ahb2apb_test");
  	end
 
-
-
 endmodule 	

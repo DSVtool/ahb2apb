@@ -39,4 +39,5 @@ class virtual_sequence extends base_sequence;
 
 endclass
 
+
 `endif //AHB2APB_SQC0

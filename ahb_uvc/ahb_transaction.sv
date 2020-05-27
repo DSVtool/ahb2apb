@@ -96,4 +96,5 @@ function ahb_tr::new(string name = "ahb_tr");
 	super.new(name);
 endfunction
 
+
 `endif //AHB_TR
