@@ -51,25 +51,18 @@ task apb_master_drv::run_phase(uvm_phase phase);
 
 	forever begin
 		@(`APB_IF);
-
-		fork
-			begin
-				fork
-					begin
-						seq_item_port.get_next_item(req);
-						drive();
-						seq_item_port.item_done();
-					end
-					
-					begin
-						@(negedge vif.reset_n);
-						init();
-					end
-				join_any
-				disable fork;
-			end
-		join
-	end
+			fork
+				begin
+					drive();
+				end
+				
+				begin
+					@(negedge vif.reset_n);
+					init();
+				end
+			join_any
+			disable fork;
+		end
 endtask
 
 function apb_master_drv::init();
