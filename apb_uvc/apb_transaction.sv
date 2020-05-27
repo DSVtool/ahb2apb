@@ -14,7 +14,7 @@ class apb_tr #(parameter APB_DW = 32, APB_AW = 32) extends uvm_sequence_item;
 	rand bit [APB_DW-1:0] prdata;	
     	 bit 			  penable;
      	 bit 			  pwrite;				
-    rand bit 			  pstrobe;
+    //rand bit 			  pstrobe;
     rand bit			  psel;
 	rand bit 			  pready;
 	rand int 			  ready_delay;											// Delay after which pready appears (simulating wait states)	
@@ -24,7 +24,7 @@ class apb_tr #(parameter APB_DW = 32, APB_AW = 32) extends uvm_sequence_item;
 		`uvm_field_int(pwdata,  	 UVM_ALL_ON)
 		`uvm_field_int(prdata,   	 UVM_ALL_ON)
 		`uvm_field_int(penable,		 UVM_ALL_ON)
-		`uvm_field_int(pstrobe,		 UVM_ALL_ON)
+		//`uvm_field_int(pstrobe,		 UVM_ALL_ON)
 		`uvm_field_int(pwrite,  	 UVM_ALL_ON)
 		`uvm_field_int(pready,  	 UVM_ALL_ON)	
 		`uvm_field_int(psel,    	 UVM_ALL_ON)	
