@@ -39,10 +39,6 @@ function void ahb2apb_env::build_phase(uvm_phase phase);
 		vseqr = virtual_sequencer::type_id::create("vseqr", this);
 		scbd = ahb2apb_scoreboard::type_id::create("scbd", this);
 
-		/* setting the current bridge model parameters */
-		uvm_config_db#(int)::set(this, ".ahb_agent.*", "buswidth", 32);    						// Data ahb write bus width set at 32b
-		uvm_config_db#(int)::set(this, ".*", "apbwidth", 32);    								// Data ahb write bus width set at 32b
-
 endfunction 
 
 function void ahb2apb_env::connect_phase(uvm_phase phase);	
