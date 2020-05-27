@@ -9,9 +9,9 @@
   
 interface ahb_vif #(parameter AHB_DW = 32, AHB_AW = 32) (input bit clk, input bit reset_n);
 
-	logic [AHB_AW:0] haddr;
-	logic [AHB_DW:0] hwdata;
-	logic [AHB_DW:0] hrdata;	
+	logic [AHB_AW-1:0] haddr;
+	logic [AHB_DW-1:0] hwdata;
+	logic [AHB_DW-1:0] hrdata;	
     logic [2:0]  hburst;
     logic [2:0]  hsize; 		
     logic [0:0]	 hwrite;
