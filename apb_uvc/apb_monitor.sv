@@ -84,7 +84,7 @@ task apb_monitor::main_task();
 					trans.prdata   = `APB_MON_IF.prdata;
 					trans.paddr    = `APB_MON_IF.paddr;
 					trans.pwrite   = `APB_MON_IF.pwrite;
-					trans.pstrobe  = `APB_MON_IF.pstrobe;
+					//trans.pstrobe  = `APB_MON_IF.pstrobe;
 					trans.penable  = `APB_MON_IF.penable;
 					trans.pready   = `APB_MON_IF.pready;
 						
