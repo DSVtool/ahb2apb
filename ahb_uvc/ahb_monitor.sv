@@ -83,7 +83,7 @@ task ahb_monitor::main_task();
 			while(trans_flag2 !== 2)
 				if(`AHB_MON_IF.hready == 1)
 					begin
-						@(posedge clk) 	
+						@(posedge vif.clk) 	
 							
 							trans = ahb_tr #(AHB_DW,AHB_AW)::type_id::create("trans");
 

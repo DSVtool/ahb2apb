@@ -7,7 +7,7 @@
 `ifndef APB_MASTER_DRV
 `define APB_MASTER_DRV
 
-`define APB_IF vif.clk_cb				
+`define APB_IF vif.mst_cb				
 
 class apb_master_drv #(parameter APB_DW = 32, APB_AW = 32) extends uvm_driver #(apb_tr);
 
