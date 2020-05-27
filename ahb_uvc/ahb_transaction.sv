@@ -53,14 +53,14 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
 	}
 	
 	constraint blenght_c{
-		(hburst == 3'b000) -> (blenght == 1); 
-		(hburst == 3'b001) -> (blength == undefburst_lenght);		 		// "undefined" length INC burst
-		(hburst == 3'b010) -> (blength == 4);		
-		(hburst == 3'b011) -> (blength == 4);		
-		(hburst == 3'b100) -> (blength == 8);		
-		(hburst == 3'b101) -> (blength == 8);		
-		(hburst == 3'b110) -> (blength == 16);
-		(hburst == 3'b111) -> (blength == 16);		
+		hburst == 3'b000 -> blenght == 1; 
+		hburst == 3'b001 -> blength == undefburst_lenght;		 		// "undefined" length INC burst
+		hburst == 3'b010 -> blength == 4;		
+		hburst == 3'b011 -> blength == 4;		
+		hburst == 3'b100 -> blength == 8;		
+		hburst == 3'b101 -> blength == 8;		
+		hburst == 3'b110 -> blength == 16;
+		hburst == 3'b111 -> blength == 16;		
 	}
 	
 	constraint order_c {
@@ -71,13 +71,13 @@ class ahb_tr #(parameter AHB_DW = 32, AHB_AW = 32) extends uvm_sequence_item;
     }
 
 	constraint address_constraint {
-		hsize == 3'b001 -> addr[0]   == 1'b0;
-		hsize == 3'b010 -> addr[1:0] == 2'b0;
-		hsize == 3'b011 -> addr[2:0] == 3'b0;
-		hsize == 3'b100 -> addr[3:0] == 4'b0;
-		hsize == 3'b101 -> addr[4:0] == 5'b0;
-		hsize == 3'b110 -> addr[5:0] == 6'b0;
-		hsize == 3'b111 -> addr[6:0] == 7'b0;
+		hsize == 3'b001 -> haddr[0]   == 1'b0;
+		hsize == 3'b010 -> haddr[1:0] == 2'b0;
+		hsize == 3'b011 -> haddr[2:0] == 3'b0;
+		hsize == 3'b100 -> haddr[3:0] == 4'b0;
+		hsize == 3'b101 -> haddr[4:0] == 5'b0;
+		hsize == 3'b110 -> haddr[5:0] == 6'b0;
+		hsize == 3'b111 -> haddr[6:0] == 7'b0;
 	}
 
 	constraint default_dyn_arr {
