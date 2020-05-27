@@ -19,7 +19,7 @@ class apb_tr #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) extends uvm_sequence_i
 	rand bit 			  pready;
 	rand int 			  ready_delay;											// Delay after which pready appears (simulating wait states)	
 
-	`uvm_object_param_utils_begin(apb_tr)
+	`uvm_object_param_utils_begin(apb_tr #(APB_BUS_W,APB_ADDR_W))
 		`uvm_field_int(paddr, 		 UVM_ALL_ON)
 		`uvm_field_int(pwdata,  	 UVM_ALL_ON)
 		`uvm_field_int(prdata,   	 UVM_ALL_ON)

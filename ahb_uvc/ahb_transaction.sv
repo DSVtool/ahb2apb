@@ -25,7 +25,7 @@ class ahb_tr #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_sequence_i
 	
 	rand bit [AHB_BUS_W-1:0] hwdata [];   
 	
-	`uvm_object_param_utils_begin(ahb_tr)
+	`uvm_object_param_utils_begin(ahb_tr #(AHB_BUS_W,AHB_ADDR_W))
 		`uvm_field_int (haddr, 			   UVM_ALL_ON)
 		`uvm_field_int (hrdata, 		   UVM_ALL_ON)
 		`uvm_field_int (hburst, 		   UVM_ALL_ON)
