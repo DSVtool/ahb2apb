@@ -99,14 +99,14 @@ task apb_master_drv::drive();
 						begin
 							#(req.ready_delay*1ns);
 							@(posedge vif.clk);
-							`APB_IF.pready = 0;		
+							`APB_IF.pready <= 0;		
 						end
 					else	
 						begin		
-							`APB_IF.prdata = req.prdata;									//read transfer
+							`APB_IF.prdata <= req.prdata;									//read transfer
 							#(req.ready_delay*1ns);											    
 							@(posedge vif.clk);
-							`APB_IF.pready = 0;	
+							`APB_IF.pready <= 0;	
 						end	
 				end			
 		end
