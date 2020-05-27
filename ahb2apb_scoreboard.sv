@@ -9,22 +9,22 @@
 
 class ahb2apb_scoreboard extends uvm_scoreboard;
 
-	int apb_width = `APB_BUS_W;
+	//int apb_width = `APB_BUS_W;
 
 	`uvm_component_utils(ahb2apb_scoreboard)
 
+	ahb_tr #(`AHB_BUS_W,`AHB_ADDR_W) ahbtrans;
+	apb_tr #(`APB_BUS_W,`APB_ADDR_W) apbtrans;
+
     uvm_analysis_export #(ahb_tr #(`AHB_BUS_W,`AHB_ADDR_W)) ahb_export;
     uvm_analysis_export #(apb_tr #(`APB_BUS_W,`APB_ADDR_W)) apb_export;
-    
-    ahb_tr #(`AHB_BUS_W,`AHB_ADDR_W) ahbtrans;
-    apb_tr #(`APB_BUS_W,`APB_ADDR_W) apbtrans;
 
    	extern virtual function void build_phase(uvm_phase phase);
 	extern function new(string name = "ahb2apb_scoreboard", uvm_component parent);				
 
-    extern virtual function wdata_compare();
-	extern virtual function rdata_compare();
-	extern virtual task run(); 
+   // extern virtual function wdata_compare();
+	//extern virtual function rdata_compare();
+	//extern virtual task run(); 
 
 endclass 
 
@@ -42,11 +42,12 @@ function void ahb2apb_scoreboard::build_phase(uvm_phase phase);
         ahb_export  = new("ahb_export", this);
         apb_export  = new("apb_export", this);
  
-        ahb_fifo    = new("ahb_fifo", this);
-        apb_fifo    = new("apb_fifo", this);
+       // ahb_fifo    = new("ahb_fifo", this);
+       // apb_fifo    = new("apb_fifo", this);
 
 endfunction
 
+/*
 task ahb2apb_scoreboard::run();
 		forever 
 			begin
@@ -57,7 +58,9 @@ task ahb2apb_scoreboard::run();
 					rdata_compare();
 			end
 endtask 
+*/
 
+/*
 function ahb2apb_scoreboard::wdata_compare();					
 
 	int i,j; 
@@ -100,7 +103,9 @@ function ahb2apb_scoreboard::wdata_compare();
 		end
 
 endfunction	
+*/
 
+/*
 function ahb2apb_scoreboard::rdata_compare();					
 
 	int i,j; 
@@ -143,6 +148,7 @@ function ahb2apb_scoreboard::rdata_compare();
 				end
 		end
 
-endfunction	
+endfunction
+*/	
 
 `endif //AHB2APB_SCOREBOARD
