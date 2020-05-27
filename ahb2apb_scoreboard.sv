@@ -13,16 +13,19 @@ class ahb2apb_scoreboard extends uvm_scoreboard;
 
 	`uvm_component_utils(ahb2apb_scoreboard)
 
+   `uvm_analysis_imp_decl(_apb)
+   `uvm_analysis_imp_decl(_ahb)
+
 	ahb_tr #(`AHB_BUS_W,`AHB_ADDR_W) ahbtrans;
 	apb_tr #(`APB_BUS_W,`APB_ADDR_W) apbtrans;
 
-    uvm_analysis_export #(ahb_tr #(`AHB_BUS_W,`AHB_ADDR_W)) ahb_export;
-    uvm_analysis_export #(apb_tr #(`APB_BUS_W,`APB_ADDR_W)) apb_export;
+   uvm_analysis_imp_apb #(apb_tr #(`AHB_BUS_W,`AHB_ADDR_W), bridge_scoreboard) apb_export;   
+   uvm_analysis_imp_ahb #(ahb_tr #(`APB_BUS_W,`APB_ADDR_W), bridge_scoreboard) ahb_export;
 
    	extern virtual function void build_phase(uvm_phase phase);
 	extern function new(string name = "ahb2apb_scoreboard", uvm_component parent);				
 
-   // extern virtual function wdata_compare();
+    //extern virtual function wdata_compare();
 	//extern virtual function rdata_compare();
 	//extern virtual task run(); 
 

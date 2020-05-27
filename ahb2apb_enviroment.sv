@@ -36,8 +36,8 @@ function void ahb2apb_env::build_phase(uvm_phase phase);
 		uvm_config_db#(uvm_active_passive_enum)::set(this, ".ahb_agent", "is_active", UVM_ACTIVE);
 		uvm_config_db#(uvm_active_passive_enum)::set(this, ".apb_agent", "is_active", UVM_ACTIVE);
 		
-		vseq = virtual_sequencer::type_id::create ("vseq", this);
-		scrboard = ahb2apb_scoreboard::type_id::create ("scrboard", this);
+		vseq = virtual_sequencer::type_id::create("vseq", this);
+		scrboard = ahb2apb_scoreboard::type_id::create("scrboard", this);
 
 		/* setting the current bridge model parameters */
 		uvm_config_db#(int)::set(this, ".ahb_agent.*", "buswidth", 32);    						// Data ahb write bus width set at 32b
