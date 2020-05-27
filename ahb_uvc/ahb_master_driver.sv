@@ -87,7 +87,7 @@ task ahb_master_drv::drive();
 
 	int i;
 	bit ready_flag;
-	int wrap_max, wrap_min;
+	int wrap_max, wrap_min, undefburst_lenght_local;
 	
 	repeat(req.tr_delay)
 		@(`AHB_IF);  
@@ -132,7 +132,7 @@ task ahb_master_drv::drive();
 						`AHB_IF.hsize  = req.hsize;												/*incr burst of undefined lenght*/	
 						`AHB_IF.haddr  = req.haddr;
 						`AHB_IF.hwrite = req.hwrite;
-						`AHB_IF.undefburst_lenght = req.undefburst_lenght;
+						undefburst_lenght_local = req.undefburst_lenght;
 						i = 0;
 						
 						while (`AHB_IF.undefburst_lenght > 0)	
@@ -168,7 +168,7 @@ task ahb_master_drv::drive();
 										`AHB_IF.hrdata = req.hrdata;
 										`AHB_IF.haddr += 2**`AHB_IF.hsize;						//Set next cycles address
 									end	
-								`AHB_IF.undefburst_lenght--;
+								undefburst_lenght_local--;
 							end
 					end		
 
