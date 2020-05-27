@@ -191,7 +191,7 @@ task ahb_master_drv::drive();
 																			`AHB_IF.htrans <= 2'b01;	
 																	end		
 																`AHB_IF.hwdata <= req.hwdata[i];																		
-																if(`AHB_IF.haddr == wrap_max)					//Set next cycles address
+																if(haddr_temp == wrap_max)					//Set next cycles address
 																	`AHB_IF.haddr <= wrap_min;		
 																else
 																	begin
@@ -216,7 +216,7 @@ task ahb_master_drv::drive();
 																		else
 																			`AHB_IF.htrans <= 2'b01;	
 																	end			
-																if(`AHB_IF.haddr == wrap_max)					//Set next cycles address
+																if(haddr_temp == wrap_max)					//Set next cycles address
 																	`AHB_IF.haddr <= wrap_min;		
 																else
 																	begin
