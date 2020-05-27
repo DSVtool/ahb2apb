@@ -84,20 +84,18 @@ task apb_master_drv::drive();
 	bit enable_flag;
 
 	@(`APB_IF)
-
-	`APB_IF.psel = req.psel;
 	 
 	@(posedge vif.clk);
 		begin
-			if(`APB_IF.psel)
+			if(req.psel)
 				begin
 					while (!enable_flag)													//Wait for ready signal
 						begin
 							@(posedge vif.clk);												//Sta ako su spremni pre prve clk ivice?
-							if(`APB_IF.penable)
+							if(req.penable)
 								enable_flag = 1;
 						end
-					if(`APB_IF.pwrite) 														//write transfer
+					if(req.pwrite) 															//write transfer
 						begin
 							#(req.ready_delay*1ns);
 							@(posedge vif.clk);
