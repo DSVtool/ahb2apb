@@ -20,7 +20,7 @@ class ahb2apb_test extends uvm_test;
 
 endclass
 
-function new(string name = "ahb2apb_test",uvm_component parent=null);
+function ahb2apb_test::new(string name = "ahb2apb_test",uvm_component parent=null);
     super.new(name,parent);
 endfunction 
  
