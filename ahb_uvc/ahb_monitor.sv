@@ -80,7 +80,7 @@ task ahb_monitor::main_task();
 	forever begin
 		@(`AHB_MON_IF);
 		begin	
-			while(trans.flag2 !== 2)
+			while(trans_flag2 !== 2)
 				if(`AHB_MON_IF.hready == 1)
 					begin
 						@(posedge clk) 	
