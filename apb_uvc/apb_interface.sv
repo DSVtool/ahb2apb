@@ -20,13 +20,13 @@ interface apb_vif #(parameter APB_DW = 32, APB_AW = 32) (input bit clk, input bi
 
 		
 	clocking mst_cb @(posedge clk);
-		output paddr;
-		output pwdata;	
-		output pwrite;
-		output penable;
-	//	output pstrobe;
-		input pready;		
-		input  prdata;	
+		input  paddr;
+		input  pwdata;	
+		input  pwrite;
+		input  penable;
+	//	input  pstrobe;
+		output pready;		
+		output prdata;	
 		output psel;				
 	endclocking
 	
