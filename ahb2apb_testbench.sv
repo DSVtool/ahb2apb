@@ -58,8 +58,8 @@ module ahb2apb_testbench;
     ); 
 
 	initial begin
-   		uvm_config_db#(virtual ahb_vif)::set(uvm_root::get(), "*.ahb_agnt.*", "vif", ahb_vif);
-		uvm_config_db#(virtual apb_vif)::set(uvm_root::get(), "*.apb_agnt.*", "vif", apb_vif);
+   		uvm_config_db#(virtual ahb_vif)::set(uvm_root::get(), "*", "vif", ahb_vif);
+		uvm_config_db#(virtual apb_vif)::set(uvm_root::get(), "*", "vif", apb_vif);
 
     	$dumpfile("dump.vcd"); 
     	$dumpvars;
