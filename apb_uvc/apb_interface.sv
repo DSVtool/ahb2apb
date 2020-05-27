@@ -15,7 +15,9 @@ interface apb_vif #(parameter APB_DW = 32, APB_AW = 32) (input bit clk, input bi
     logic [0:0]		 pwrite;
     logic [0:0]  	 penable;
     //logic [0:0]  	 pstrobe;	
-    logic [0:0]  	 pready;	
+    logic [0:0]  	 pready;
+    logic [0:0]  	 psel;
+
 		
 	clocking mst_cb @(posedge clk);
 		output paddr;
@@ -24,7 +26,8 @@ interface apb_vif #(parameter APB_DW = 32, APB_AW = 32) (input bit clk, input bi
 		output penable;
 	//	output pstrobe;
 		input pready;		
-		input  prdata;					
+		input  prdata;	
+		output psel;				
 	endclocking
 	
 	clocking mon_cb @(posedge clk);
@@ -35,6 +38,7 @@ interface apb_vif #(parameter APB_DW = 32, APB_AW = 32) (input bit clk, input bi
 		input pwrite;
 		input penable;
 		input pready;
+		input psel;
 	endclocking
 
 endinterface

@@ -135,7 +135,7 @@ task ahb_master_drv::drive();
 						undefburst_lenght_local = req.undefburst_lenght;
 						i = 0;
 						
-						while (`AHB_IF.undefburst_lenght > 0)	
+						while (undefburst_lenght_local > 0)	
 							begin
 								if(i == 0)
 									`AHB_IF.htrans = 2'b10;
