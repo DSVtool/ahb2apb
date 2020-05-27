@@ -9,8 +9,6 @@
 
 class ahb2apb_scoreboard extends uvm_scoreboard;
 
-	//int apb_width = `APB_BUS_W;
-
 	`uvm_component_utils(ahb2apb_scoreboard)
    
     `uvm_analysis_imp_decl(_apb)
@@ -44,9 +42,7 @@ class ahb2apb_scoreboard extends uvm_scoreboard;
 endclass 
 
 function ahb2apb_scoreboard::new (string name, uvm_component parent);
-	super.new(name, parent);
- 	    ahb_export  = new("ahb_export", this);
-   		apb_export  = new("apb_export", this);
+	super.new(name, parent); 
 endfunction  
 
 function void ahb2apb_scoreboard::build_phase(uvm_phase phase);
@@ -58,7 +54,8 @@ endfunction
 
 task ahb2apb_scoreboard::run();
 	forever begin
-				ahb_fifo.get(ahbtrans);
+				ahbtrans = ahb_tr #(`HDATA_W,`HADDR_W)::type_id::create("ahbtrans");
+ 		        ahbtrans = ahb_item_queue.pop_back();
 				if(ahbtrans.hwrite)
 					wdata_compare();
 				else
@@ -74,15 +71,15 @@ function ahb2apb_scoreboard::wdata_compare();
 	int data_buff[];
 	int arr_size;
 
-	if(ahbtrans.hsize > apb_width)
+	if(ahbtrans.hsize > `AHB_BUS_W)
 		begin
 			arr_size = 8*2**ahbtrans.hsize; 
 			data_buff = new[arr_size]; 
 			while (ahbtrans.htrans !== 2 && ahbtrans.htrans !== 1)
-				for (i=0; i < arr_size; i=+apb_width)
+				for (i=0; i < arr_size; i=+`AHB_BUS_W)
 					begin
 						apb_fifo.get(apbtrans);
-						data_buff[i+apb_width:i] = apbtrans.pwdata;
+						data_buff[i+`AHB_BUS_W:i] = apbtrans.pwdata;
 					end
 			if(data_buff == ahbtrans.hwdata)
 				begin
@@ -93,7 +90,7 @@ function ahb2apb_scoreboard::wdata_compare();
 					`uvm_info("wdata_compare", {"Test: Fail!"}, UVM_LOW);
 				end
 		end		
-	else if (ahbtrans.hsize < apb_width)
+	else if (ahbtrans.hsize < `AHB_BUS_W)
 		begin
 			//addlater
 		end
@@ -119,15 +116,15 @@ function ahb2apb_scoreboard::rdata_compare();
 	int data_buff[];
 	int arr_size;
 
-	if(ahbtrans.hsize > apb_width)
+	if(ahbtrans.hsize > `AHB_BUS_W)
 		begin
 			arr_size = 8*2**ahbtrans.hsize; 
 			data_buff = new[arr_size]; 
 			while (ahbtrans.htrans !== 2 && ahbtrans.htrans !== 1)
-				for (i=0; i < arr_size; i=+apb_width)
+				for (i=0; i < arr_size; i=+`AHB_BUS_W)
 					begin
 						apb_fifo.get(apbtrans);
-						data_buff[i+apb_width:i] = apbtrans.prdata;
+						data_buff[i+`AHB_BUS_W:i] = apbtrans.prdata;
 					end
 			if(data_buff == ahbtrans.hrdata)
 				begin
@@ -139,7 +136,7 @@ function ahb2apb_scoreboard::rdata_compare();
 				end
 			data_buff.delete;
 		end
-	else if (ahbtrans.hsize < apb_width)
+	else if (ahbtrans.hsize < AHB_BUS_W)
 		begin
 			//addlater
 		end
