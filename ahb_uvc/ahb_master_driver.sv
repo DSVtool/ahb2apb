@@ -95,16 +95,16 @@ task ahb_master_drv::drive();
 	if(!req.hsel)
 		break;
 
-	`AHB_IF.hburst = req.hburst;	
+	`AHB_IF.hburst <= req.hburst;	
 	
 	@(posedge vif.clk);
 	
 	case(req.hburst) 																	
 		3'b000	:	begin
-						`AHB_IF.haddr  = req.haddr;												/*single burst transfer*/
-						`AHB_IF.hsize  = req.hsize;
-						`AHB_IF.hwrite = req.hwrite;
-						`AHB_IF.htrans = 2'b10;
+						`AHB_IF.haddr  <= req.haddr;												/*single burst transfer*/
+						`AHB_IF.hsize  <= req.hsize;
+						`AHB_IF.hwrite <= req.hwrite;
+						`AHB_IF.htrans <= 2'b10;
 						
 						if(req.hwrite)															/*write transfer*/
 							begin
@@ -124,23 +124,23 @@ task ahb_master_drv::drive();
 										if(`AHB_IF.hready)
 											ready_flag = 1;
 									end			
-								`AHB_IF.hrdata = req.hrdata;
+								`AHB_IF.hrdata <= req.hrdata;
 							end
 					end
 											
 		3'b001	:	begin
-						`AHB_IF.hsize  = req.hsize;												/*incr burst of undefined lenght*/	
-						`AHB_IF.haddr  = req.haddr;
-						`AHB_IF.hwrite = req.hwrite;
+						`AHB_IF.hsize  <= req.hsize;												/*incr burst of undefined lenght*/	
+						`AHB_IF.haddr  <= req.haddr;
+						`AHB_IF.hwrite <= req.hwrite;
 						undefburst_lenght_local = req.undefburst_lenght;
 						i = 0;
 						
 						while (undefburst_lenght_local > 0)	
 							begin
 								if(i == 0)
-									`AHB_IF.htrans = 2'b10;
+									`AHB_IF.htrans <= 2'b10;
 								else
-									`AHB_IF.htrans = 2'b11;
+									`AHB_IF.htrans <= 2'b11;
 								if(req.hwrite)													/*write transfer*/
 									begin
 										while (!ready_flag)										//Wait for ready signal
@@ -149,9 +149,9 @@ task ahb_master_drv::drive();
 												if(`AHB_IF.hready)
 													ready_flag = 1;
 												else
-													`AHB_IF.htrans = 2'b01;
+													`AHB_IF.htrans <= 2'b01;
 											end
-										`AHB_IF.hwdata = req.hwdata[i];					
+										`AHB_IF.hwdata <= req.hwdata[i];					
 										`AHB_IF.haddr += 2**`AHB_IF.hsize;						//Set next cycles address
 										i++;
 									end			
@@ -163,9 +163,9 @@ task ahb_master_drv::drive();
 												if(`AHB_IF.hready)
 													ready_flag = 1;
 												else
-													`AHB_IF.htrans = 2'b01;	
+													`AHB_IF.htrans <= 2'b01;	
 											end			
-										`AHB_IF.hrdata = req.hrdata;
+										`AHB_IF.hrdata <= req.hrdata;
 										`AHB_IF.haddr += 2**`AHB_IF.hsize;						//Set next cycles address
 									end	
 								undefburst_lenght_local--;
@@ -173,9 +173,9 @@ task ahb_master_drv::drive();
 					end		
 
 		3'b010, 3'b100, 3'b110:		begin
-										`AHB_IF.hsize = req.hsize;									/*4/8/16 beat wrapping burst*/
-										`AHB_IF.haddr = req.haddr;
-										`AHB_IF.hwrite = req.hwrite;									
+										`AHB_IF.hsize <= req.hsize;									/*4/8/16 beat wrapping burst*/
+										`AHB_IF.haddr <= req.haddr;
+										`AHB_IF.hwrite <= req.hwrite;									
 			    /*postoji li INT()*/	wrap_min = (/*?INT?*/(`AHB_IF.haddr/(2**`AHB_IF.hsize*req.blenght)))*(2**`AHB_IF.hsize*req.blenght);
 										wrap_max = wrap_min + (2**`AHB_IF.hsize*req.blenght);
 										
@@ -184,20 +184,20 @@ task ahb_master_drv::drive();
 												for(i=0;i<req.blenght;i++)
 													begin
 														if(i == 0)										//set state
-															`AHB_IF.htrans = 2'b10;
+															`AHB_IF.htrans <= 2'b10;
 														else
-															`AHB_IF.htrans = 2'b11;												
+															`AHB_IF.htrans <= 2'b11;												
 														while (!ready_flag)								//Wait for ready signal
 															begin
 																@(posedge vif.clk);
 																if(`AHB_IF.hready)
 																	ready_flag = 1;
 																else
-																	`AHB_IF.htrans = 2'b01;	
+																	`AHB_IF.htrans <= 2'b01;	
 															end		
-														`AHB_IF.hwdata = req.hwdata[i];																		
+														`AHB_IF.hwdata <= req.hwdata[i];																		
 														if(`AHB_IF.haddr == wrap_max)					//Set next cycles address
-															`AHB_IF.haddr = wrap_min;		
+															`AHB_IF.haddr <= wrap_min;		
 														else
 															`AHB_IF.haddr += 2**`AHB_IF.hsize;
 													end
@@ -207,20 +207,20 @@ task ahb_master_drv::drive();
 												for(i=0;i<req.blenght;i++)
 													begin
 														if(i == 0)										//set state
-															`AHB_IF.htrans = 2'b10;
+															`AHB_IF.htrans <= 2'b10;
 														else
-															`AHB_IF.htrans = 2'b11;																
+															`AHB_IF.htrans <= 2'b11;																
 														while (!ready_flag)								//Wait for ready signal
 															begin
 																@(posedge vif.clk);
 																if(`AHB_IF.hready)
 																	ready_flag = 1;
 																else
-																	`AHB_IF.htrans = 2'b01;	
+																	`AHB_IF.htrans <= 2'b01;	
 															end			
-														`AHB_IF.hrdata = req.hrdata;	
+														`AHB_IF.hrdata <= req.hrdata;	
 														if(`AHB_IF.haddr == wrap_max)					//Set next cycles address
-															`AHB_IF.haddr = wrap_min;		
+															`AHB_IF.haddr <= wrap_min;		
 														else
 															`AHB_IF.haddr += 2**`AHB_IF.hsize;
 													end	
@@ -228,18 +228,18 @@ task ahb_master_drv::drive();
 									end			
 			
 		3'b011, 3'b101 ,3'b111:		begin
-										`AHB_IF.hsize = req.hsize;									/*4/8/16 beat incrementing burst*/
-										`AHB_IF.haddr = req.haddr;
-										`AHB_IF.hwrite = req.hwrite;
+										`AHB_IF.hsize <= req.hsize;									/*4/8/16 beat incrementing burst*/
+										`AHB_IF.haddr <= req.haddr;
+										`AHB_IF.hwrite <= req.hwrite;
 												
 										if(req.hwrite)												/*write transfers*/
 											begin
 												for(i=0;i<req.blenght;i++)
 													begin
 														if(i == 0)											//set state
-															`AHB_IF.htrans = 2'b10;
+															`AHB_IF.htrans <= 2'b10;
 														else
-															`AHB_IF.htrans = 2'b11;													
+															`AHB_IF.htrans <= 2'b11;													
 														begin
 															while (!ready_flag)								//Wait for ready signal
 																begin
@@ -247,9 +247,9 @@ task ahb_master_drv::drive();
 																	if(`AHB_IF.hready)
 																		ready_flag = 1;
 																	else
-																		`AHB_IF.htrans = 2'b01;	
+																		`AHB_IF.htrans <= 2'b01;	
 																end	
-															`AHB_IF.hwdata = req.hwdata[i];																		
+															`AHB_IF.hwdata <= req.hwdata[i];																		
 															`AHB_IF.haddr += 2**`AHB_IF.hsize;				//Set next cycles address
 														end	
 													end
@@ -259,24 +259,24 @@ task ahb_master_drv::drive();
 												for(i=0;i<req.blenght;i++)
 													begin
 														if(i == 0)										//set state
-															`AHB_IF.htrans = 2'b10;
+															`AHB_IF.htrans <= 2'b10;
 														else
-															`AHB_IF.htrans = 2'b11;														
+															`AHB_IF.htrans <= 2'b11;														
 														while (!ready_flag)								//Wait for ready signal
 															begin
 																@(posedge vif.clk);
 																if(`AHB_IF.hready)
 																	ready_flag = 1;
 																else
-																	`AHB_IF.htrans = 2'b01;				//Busy state
+																	`AHB_IF.htrans <= 2'b01;				//Busy state
 															end			
-														`AHB_IF.hrdata = req.hrdata;	
+														`AHB_IF.hrdata <= req.hrdata;	
 														`AHB_IF.haddr += 2**`AHB_IF.hsize;				//Set next cycles address
 													end
 											end			
 									end			
 	endcase
-	`AHB_IF.htrans = 2'b00;
+	`AHB_IF.htrans <= 2'b00;
 endtask
 
 `endif //AHB_MASTER_DRV
