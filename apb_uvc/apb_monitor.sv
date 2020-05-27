@@ -76,7 +76,7 @@ task apb_monitor::main_task();
 
 	forever begin
 		if(`APB_MON_IF.pready && `APB_MON_IF.penable)
-			@(posedge clk);
+			@(posedge vif.clk);
 				begin
 					trans = apb_tr #(APB_DW,APB_AW)::type_id::create("trans");
 					

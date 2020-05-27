@@ -16,8 +16,9 @@ interface ahb_vif #(parameter AHB_DW = 32, AHB_AW = 32) (input bit clk, input bi
     logic [2:0]  hsize; 		
     logic [0:0]	 hwrite;
     logic [0:0]  hready;
-    logic [0:0]  hresp;				
-    logic [0:0]  hexokay;
+    logic [1:0]  htrans;
+	//logic [0:0]  hresp;				
+    //logic [0:0]  hexokay;
 	
 	clocking mst_cb @(posedge clk);
 		output haddr;
@@ -25,11 +26,11 @@ interface ahb_vif #(parameter AHB_DW = 32, AHB_AW = 32) (input bit clk, input bi
 		output hburst;
 		output hsize; 		
 		output hwrite;
-		input  hready;	
 		output htrans;
+		input  hready;	
 		input  hrdata;	
-		input  hresp;				
-		input  hexokay;
+		//input  hresp;				
+		//input  hexokay;
 	endclocking
 	
 	clocking mon_cb @(posedge clk);
@@ -41,8 +42,8 @@ interface ahb_vif #(parameter AHB_DW = 32, AHB_AW = 32) (input bit clk, input bi
 		input hready;
 		input hrdata;	
 		input htrans;
-		input hresp;				
-		input hexokay;
+		//input hresp;				
+		//input hexokay;
 	endclocking
 
 endinterface

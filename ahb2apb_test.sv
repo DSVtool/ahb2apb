@@ -10,7 +10,7 @@
 class ahb2apb_test extends uvm_test;
 	
 	ahb2apb_env   env;
-	virtual_sequence v_seq;
+	virtual_sequence vseq;
 	
 	`uvm_component_utils(ahb2apb_test)
   
