@@ -33,8 +33,8 @@ function void ahb2apb_env::build_phase(uvm_phase phase);
 		apb_agnt = apb_slave_agent#(`APB_BUS_W,`APB_ADDR_W)::type_id::create("apb_agnt", this);
 
 		/* setting both agents to be active */
-		uvm_config_db#(uvm_active_passive_enum)::set(this, ".ahb_agent", "is_active", UVM_ACTIVE);
-		uvm_config_db#(uvm_active_passive_enum)::set(this, ".apb_agent", "is_active", UVM_ACTIVE);
+		uvm_config_db#(uvm_active_passive_enum)::set(this, ".ahb_agent", "ahb_is_active", UVM_ACTIVE);
+		uvm_config_db#(uvm_active_passive_enum)::set(this, ".apb_agent", "apb_is_active", UVM_ACTIVE);
 		
 		vseqr = virtual_sequencer::type_id::create("vseqr", this);
 		scbd = ahb2apb_scoreboard::type_id::create("scbd", this);
