@@ -27,7 +27,7 @@ module ahb2apb_testbench;
 	initial 
 		begin
 			reset_n = 0;
-			#5;
+			#1;
 			reset_n = 1;
 		end 
 

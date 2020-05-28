@@ -50,7 +50,7 @@ task ahb_master_drv::run_phase(uvm_phase phase);
 	init();	
 
 	forever begin
-		@(`AHB_IF);
+		//@(`AHB_IF);
 
 		fork
 			begin
@@ -58,6 +58,7 @@ task ahb_master_drv::run_phase(uvm_phase phase);
 					begin
 						seq_item_port.get_next_item(req);
 						`uvm_info("ahb_master_driver - build_phase", $psprintf("Item received"), UVM_NONE);
+						req.print();
 						drive();
 						seq_item_port.item_done();
 						`uvm_info("ahb_master_driver - build_phase", $psprintf("Item done"), UVM_NONE);
