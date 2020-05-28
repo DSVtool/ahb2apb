@@ -15,7 +15,7 @@ module ahb2apb_testbench;
 	bit reset_n;
 
 	ahb_vif #(`AHB_BUS_W,`AHB_ADDR_W) 	ahb_vif(clk,reset_n);
-	apb_vif #(`APB_BUS_W,`AHB_ADDR_W)	apb_vif(clk,reset_n);
+	apb_vif #(`APB_BUS_W,`APB_ADDR_W)	apb_vif(clk,reset_n);
 
 	/* Clock Generation*/
 
@@ -58,8 +58,8 @@ module ahb2apb_testbench;
     ); 
 
 	initial begin
-   		uvm_config_db#(virtual ahb_vif)::set(uvm_root::get(), "*", "ahb_vif", ahb_vif);
-		uvm_config_db#(virtual apb_vif)::set(uvm_root::get(), "*", "apb_vif", apb_vif);
+   		uvm_config_db#(virtual ahb_vif #(`AHB_BUS_W,`AHB_ADDR_W))::set(uvm_root::get(), "*", "ahb_vif", ahb_vif);
+		uvm_config_db#(virtual apb_vif #(`APB_BUS_W,`APB_ADDR_W))::set(uvm_root::get(), "*", "apb_vif", apb_vif);
 
     	$dumpfile("dump.vcd"); 
     	$dumpvars;
