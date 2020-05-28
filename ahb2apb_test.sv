@@ -36,7 +36,7 @@ task ahb2apb_test::run_phase(uvm_phase phase);
 		//uvm_config_db#(uvm_object_wrapper)::set(this, "env.vseqr.run_phase", "default_sequence", virtual_sequence::type_id::get());
 
 		phase.raise_objection(this);
-		v_seq.start(env.v_seq);
+		v_seq.start(env.vseqr);
 		phase.drop_objection(this);
 endtask
 
