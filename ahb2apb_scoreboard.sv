@@ -22,7 +22,7 @@ class ahb2apb_scoreboard extends uvm_scoreboard;
    	extern virtual function void build_phase(uvm_phase phase);
 	extern function new(string name = "ahb2apb_scoreboard", uvm_component parent);				
 
-   // extern virtual function wdata_compare();
+    //extern virtual function wdata_compare();
 	//extern virtual function rdata_compare();
 	//extern virtual task run(); 
 
