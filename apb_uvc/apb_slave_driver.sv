@@ -46,6 +46,9 @@ endfunction
 task apb_slave_drv::run_phase(uvm_phase phase);
 	super.run_phase(phase);
 
+	rand bit [APB_DATA_W-1:0] read_data;
+	int ready_delay;
+
 	@(posedge vif.clk);
 	init();	
 
@@ -80,24 +83,26 @@ task apb_slave_drv::drive();
 	 
 	@(posedge vif.clk);
 		begin
-			if(req.psel)
+			if(`APB_IF.psel)
 				begin
 					while (!enable_flag)													//Wait for ready signal
 						begin
 							@(posedge vif.clk);												//Sta ako su spremni pre prve clk ivice?
-							if(req.penable)
+							if(`APB_IF.penable)
 								enable_flag = 1;
 						end
-					if(req.pwrite) 															//write transfer
+					std::randomize (ready_delay);	
+					if(`APB_IF.pwrite) 															//write transfer
 						begin
-							#(req.ready_delay*1ns);
+							#(ready_delay*1ns);
 							@(posedge vif.clk);
 							`APB_IF.pready <= 0;		
 						end
 					else	
-						begin		
-							`APB_IF.prdata <= req.prdata;									//read transfer
-							#(req.ready_delay*1ns);											    
+						begin	
+							std::randomize(readable_data);
+							`APB_IF.prdata <= readable_data;									//read transfer
+							#(ready_delay*1ns);											    
 							@(posedge vif.clk);
 							`APB_IF.pready <= 0;	
 						end	
