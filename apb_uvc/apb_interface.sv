@@ -25,9 +25,9 @@ interface apb_vif #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) (input bit clk, i
 		input  pwrite;
 		input  penable;
 	//	input  pstrobe;
+		input  psel;				
 		output pready;		
 		output prdata;	
-		output psel;				
 	endclocking
 	
 	clocking mon_cb @(posedge clk);
