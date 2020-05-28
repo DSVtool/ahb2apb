@@ -30,7 +30,7 @@ endfunction
 function void ahb_master_agent::build_phase(uvm_phase phase);
 	super.build_phase(phase);
 
-	if(!uvm_config_db#(uvm_active_passive_enum)::get(this, "", "ahb_is_active", is_active))
+	if(!uvm_config_db#(uvm_active_passive_enum)::get(this, "", "is_active", is_active))
 		begin
 			`uvm_fatal("ahb_master_agent - build_phase", "uvm_active_passive not set");
 		end

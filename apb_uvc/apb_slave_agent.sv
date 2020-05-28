@@ -30,7 +30,7 @@ endfunction
 function void apb_slave_agent::build_phase(uvm_phase phase);
 	super.build_phase(phase);
 
-	if(!uvm_config_db#(uvm_active_passive_enum)::get(this, "", "apb_is_active", is_active))
+	if(!uvm_config_db#(uvm_active_passive_enum)::get(this, "", "is_active", is_active))
 		begin
 			`uvm_fatal("apb_slave_agent - build_phase", "uvm_active_passive not set");
 		end
