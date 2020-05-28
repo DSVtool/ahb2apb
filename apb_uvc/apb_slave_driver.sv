@@ -7,7 +7,7 @@
 `ifndef APB_SLAVE_DRV
 `define APB_SLAVE_DRV
 
-`define APB_IF vif.mst_cb				
+`define APB_IF vif.slv_cb				
 
 class apb_slave_drv #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) extends uvm_driver #(apb_tr);
 
