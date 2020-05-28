@@ -9,7 +9,7 @@
 
 `define APB_IF vif.slv_cb				
 
-class apb_slave_drv #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) extends uvm_driver #(apb_tr #(APB_BUS_W,APB_ADDR_W));
+class apb_slave_drv #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) extends uvm_driver #(apb_tr#(APB_BUS_W,APB_ADDR_W));
 
 	rand bit [APB_BUS_W-1:0] read_data;
 	rand int ready_delay;
