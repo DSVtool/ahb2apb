@@ -30,7 +30,7 @@ function void ahb2apb_test::build_phase(uvm_phase phase);
 		
 endfunction 
 
-task ahb2apb_test::run();
+task ahb2apb_test::run_phase(uvm_phase phase);
 		uvm_config_db#(uvm_object_wrapper)::set(this, "env.vseqr.run_phase", "default_sequence", virtual_sequence::type_id::get());
 endtask
 
