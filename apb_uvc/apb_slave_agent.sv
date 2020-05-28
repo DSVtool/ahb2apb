@@ -54,7 +54,7 @@ function void apb_slave_agent::connect_phase(uvm_phase phase);
 		begin
 			drv.seq_item_port.connect(sqr.seq_item_export);
 		end
-
+	`uvm_info("apb_slave_agent - connect_phase", $psprintf("Succesfully completed", UVM_NONE);	
 endfunction
 
 task apb_slave_agent::run_phase(uvm_phase phase);
