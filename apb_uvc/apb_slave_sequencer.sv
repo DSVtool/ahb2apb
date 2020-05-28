@@ -9,7 +9,7 @@
 
 `define APB_IF vif.clk_cb				
 
-class apb_slave_sqr #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) extends uvm_sequencer #(apb_tr#(AHB_BUS_W,AHB_ADDR_W));
+class apb_slave_sqr #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) extends uvm_sequencer #(apb_tr#(APB_BUS_W,APB_ADDR_W));
 
 	virtual apb_vif #(APB_BUS_W,APB_ADDR_W) vif;
 
