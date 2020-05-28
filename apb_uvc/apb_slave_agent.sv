@@ -53,8 +53,6 @@ function void apb_slave_agent::connect_phase(uvm_phase phase);
 	if(get_is_active() == UVM_ACTIVE)
 		begin
 			drv.seq_item_port.connect(sqr.seq_item_export);
-			`uvm_info("apb_slave_agent - connect_phase", $psprintf("Succesfully completed", UVM_NONE);
-
 		end
 
 endfunction
