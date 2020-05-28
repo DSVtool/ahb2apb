@@ -86,6 +86,7 @@ class ahb_tr #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_sequence_i
 
 	function void post_randomize();
 		hwdata = new[blenght];
+		void'(std::randomize(hwdata));
 	endfunction 
 
 	extern function new(string name = "ahb_tr");
