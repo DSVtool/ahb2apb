@@ -91,7 +91,7 @@ task apb_slave_drv::drive();
 							if(`APB_IF.penable)
 								enable_flag = 1;
 						end
-					std::randomize(ready_delay) with {ready_delay inside {[0:20]}};	
+					std::randomize(ready_delay) with {ready_delay inside {[0:20]};};	
 					if(`APB_IF.pwrite) 														//write transfer
 						begin
 							#(ready_delay*1ns);
@@ -100,7 +100,7 @@ task apb_slave_drv::drive();
 						end
 					else	
 						begin	
-							std::randomize(read_data) with {read_data inside {[0:2**APB_BUS_W-1]}};
+							std::randomize(read_data) with {read_data inside {[0:2**APB_BUS_W-1]};};
 							`APB_IF.prdata <= read_data;									//read transfer
 							#(ready_delay*1ns);											    
 							@(posedge vif.clk);
