@@ -11,6 +11,9 @@
 
 class apb_slave_drv #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) extends uvm_driver #(apb_tr);
 
+	rand bit [APB_DATA_W-1:0] read_data;
+	rand int ready_delay;
+
 	virtual apb_vif #(APB_BUS_W,APB_ADDR_W) vif;
 
 	`uvm_component_param_utils(apb_slave_drv #(APB_BUS_W,APB_ADDR_W)) 
@@ -45,9 +48,6 @@ endfunction
 
 task apb_slave_drv::run_phase(uvm_phase phase);
 	super.run_phase(phase);
-
-	rand bit [APB_DATA_W-1:0] read_data;
-	int ready_delay;
 
 	@(posedge vif.clk);
 	init();	
