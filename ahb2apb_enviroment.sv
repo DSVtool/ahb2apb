@@ -37,7 +37,7 @@ function void ahb2apb_env::build_phase(uvm_phase phase);
 		uvm_config_db#(uvm_active_passive_enum)::set(this, "apb_agnt", "is_active", UVM_ACTIVE);
 		
 		vseqr = virtual_sequencer::type_id::create("vseqr", this);
-		scbd = ahb2apb_scoreboard::type_id::create("scbd", this);
+		//scbd = ahb2apb_scoreboard::type_id::create("scbd", this);
 
 endfunction 
 
@@ -46,8 +46,8 @@ function void ahb2apb_env::connect_phase(uvm_phase phase);
 		vseqr.ahb_sqr = ahb_agnt.sqr; 	
 		vseqr.apb_sqr = apb_agnt.sqr;
 
-		ahb_agnt.mon.default_ap.connect(scbd.ahb_export);
-		apb_agnt.mon.default_ap.connect(scbd.apb_export);
+		//ahb_agnt.mon.default_ap.connect(scbd.ahb_export);
+		//apb_agnt.mon.default_ap.connect(scbd.apb_export);
 
 endfunction
 
