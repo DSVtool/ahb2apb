@@ -27,7 +27,6 @@ class apb_tr #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) extends uvm_sequence_i
 		`uvm_field_int(pwrite,  	 UVM_ALL_ON)
 		`uvm_field_int(pready,  	 UVM_ALL_ON)	
 		`uvm_field_int(psel,    	 UVM_ALL_ON)	
-		`uvm_field_int(ready_delay,  UVM_ALL_ON)				
 	`uvm_object_utils_end
     
 	extern function new(string name = "apb_tr");
