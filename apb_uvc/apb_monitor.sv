@@ -56,15 +56,14 @@ task apb_monitor::run_phase(uvm_phase phase);
 		@(`APB_MON_IF);
 		fork
 			begin
-				fork
-					main_task();
-					begin
-						@(negedge vif.reset_n);
-					end
-				join_any
-				disable fork;
+				main_task();
 			end
-		join
+				
+			begin
+				@(negedge vif.reset_n);
+			end
+			join_any
+		disable fork;
 	end
 endtask
 
@@ -72,7 +71,7 @@ task apb_monitor::main_task();
 	
 	apb_tr #(APB_BUS_W,APB_ADDR_W) trans;
 	
-	`uvm_info("apb_monitor", "monitor main started", UVM_LOW);
+	`uvm_info("apb_monitor", "APB monitor main task started", UVM_LOW);
 
 	forever begin
 		if(`APB_MON_IF.pready && `APB_MON_IF.penable)

@@ -56,15 +56,14 @@ task ahb_monitor::run_phase(uvm_phase phase);
 		@(`AHB_MON_IF);
 		fork
 			begin
-				fork
-					main_task();
-					begin
-						@(negedge vif.reset_n);
-					end
-				join_any
-				disable fork;
+				main_task();
 			end
-		join
+
+			begin
+				@(negedge vif.reset_n);
+			end
+			join_any
+		disable fork;
 	end
 endtask
 
@@ -75,7 +74,7 @@ task ahb_monitor::main_task();
 	int trans_prev,trans_curr;
 	int trans_flag = 0, trans_flag2 = 1;
 	
-	`uvm_info("ahb_monitor", "monitor main started", UVM_LOW);
+	`uvm_info("ahb_monitor", "AHB monitor main task started", UVM_LOW);
 
 	forever begin
 		@(`AHB_MON_IF);

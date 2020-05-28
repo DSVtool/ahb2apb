@@ -31,7 +31,7 @@ class ahb2apb_scoreboard extends uvm_scoreboard;
   	function write_apb(apb_tr #(`APB_BUS_W,`APB_ADDR_W) tr);
     	apb_item_queue.push_front(tr);
   	endfunction
-
+  	
     extern virtual function void build_phase(uvm_phase phase);
 	extern function new(string name = "ahb2apb_scoreboard", uvm_component parent);				
 

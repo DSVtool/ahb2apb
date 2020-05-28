@@ -80,7 +80,10 @@ task apb_slave_drv::drive();
 	bit enable_flag;
 
 	@(`APB_IF)
-	 
+	
+	`uvm_info("apb_slave_driver - build_phase", $psprintf("Item received"), UVM_NONE);
+
+
 	@(posedge vif.clk);
 		begin
 			if(`APB_IF.psel)
@@ -108,6 +111,9 @@ task apb_slave_drv::drive();
 						end	
 				end			
 		end
+	
+	`uvm_info("apb_slave_driver - build_phase", $psprintf("Item completed"), UVM_NONE);
+	
 endtask
 
 `endif //APB_SLAVE_DRV
