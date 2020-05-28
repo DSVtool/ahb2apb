@@ -15,7 +15,7 @@ class ahb2apb_test extends uvm_test;
   
   	extern function new(string name = "ahb2apb_test", uvm_component parent);
 	extern virtual function void build_phase(uvm_phase phase);
-	extern virtual task void run_phase(uvm_phase phase);
+	extern virtual task run_phase(uvm_phase phase);
 
 endclass
 
