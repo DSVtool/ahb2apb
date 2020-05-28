@@ -11,7 +11,7 @@
 
 class apb_slave_drv #(parameter APB_BUS_W = 32, APB_ADDR_W = 32) extends uvm_driver #(apb_tr);
 
-	rand bit [APB_DATA_W-1:0] read_data;
+	rand bit [APB_BUS_W-1:0] read_data;
 	rand int ready_delay;
 
 	virtual apb_vif #(APB_BUS_W,APB_ADDR_W) vif;
