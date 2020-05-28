@@ -37,7 +37,7 @@ function void apb_slave_drv::build_phase(uvm_phase phase);
 
 	if(!uvm_config_db#(virtual apb_vif #(APB_BUS_W,APB_ADDR_W))::get(this, "", "apb_vif", vif))
 		begin
-			`uvm_fatal("apb_slave_drv - build_phase", "vif not set!");
+			`uvm_fatal("apb_slave_drv - build_phase", "apb_vif not set!");
 		end
 		
 endfunction

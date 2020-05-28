@@ -38,7 +38,7 @@ function void ahb_monitor::build_phase(uvm_phase phase);
 
 	if(!uvm_config_db#(virtual ahb_vif #(AHB_BUS_W,AHB_ADDR_W))::get(this, "", "ahb_vif", vif))
 		begin
-			`uvm_fatal("ahb_monitor - build_phase", "vif not set!");
+			`uvm_fatal("ahb_monitor - build_phase", "ahb_vif not set!");
 		end
 
 endfunction
