@@ -11,7 +11,7 @@
 
 class ahb_master_drv #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_driver #(ahb_tr #(AHB_BUS_W,AHB_ADDR_W));
 
-	virtual ahb_vif #(AHB_BUS_W,AHB_ADDR_W)  vif;
+	virtual interface ahb_vif #(AHB_BUS_W,AHB_ADDR_W)  vif;
 
 	`uvm_component_param_utils(ahb_master_drv #(AHB_BUS_W,AHB_ADDR_W)) 
 
@@ -89,7 +89,7 @@ task ahb_master_drv::drive();
 	bit ready_flag;
 	int wrap_max, wrap_min, undefburst_lenght_local, haddr_temp;
 
-	`uvm_info("ahb driver", "hello-5", UVM_LOW)
+	`uvm_phase_info("ahb driver", "hello-5", UVM_LOW)
 	repeat(req.tr_delay)
 		@(posedge vif.clk);  
 	`uvm_info("ahb driver", "hello-4", UVM_LOW)

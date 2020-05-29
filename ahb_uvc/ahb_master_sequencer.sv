@@ -11,7 +11,7 @@
 
 class ahb_master_sqr #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_sequencer #(ahb_tr #(AHB_BUS_W,AHB_ADDR_W));
 
-	virtual ahb_vif #(AHB_BUS_W,AHB_ADDR_W) vif;
+	virtual interface ahb_vif #(AHB_BUS_W,AHB_ADDR_W) vif;
 
 	`uvm_component_param_utils(ahb_master_sqr #(AHB_BUS_W,AHB_ADDR_W))
 
