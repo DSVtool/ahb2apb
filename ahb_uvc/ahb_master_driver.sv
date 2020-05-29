@@ -90,6 +90,7 @@ task ahb_master_drv::drive();
 	int wrap_max, wrap_min, undefburst_lenght_local, haddr_temp;
 
 	`uvm_info("ahb driver", "hello-5", UVM_LOW)
+	repeat(req.tr_delay)
 		@(posedge vif.clk);  
 	`uvm_info("ahb driver", "hello-4", UVM_LOW)
 	if(req.hsel)

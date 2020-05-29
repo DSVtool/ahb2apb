@@ -78,10 +78,10 @@ task ahb_monitor::main_task();
 
 	forever begin
 
-		#20
-			`uvm_info("ahb_monitor", "AHB monitor main task 1", UVM_LOW);
+		//#20
+		//	`uvm_info("ahb_monitor", "AHB monitor main task 1", UVM_LOW);
 
-		/*@(`AHB_MON_IF);
+		@(`AHB_MON_IF);
 		begin	
 			while(trans_flag2 !== 2)
 				begin
@@ -112,7 +112,7 @@ task ahb_monitor::main_task();
 								default_ap.write(trans);													// writing to the analysis port
 						end	
 				end		
-			i=0;*/	
+			i=0;	
 		end		
 endtask
 
