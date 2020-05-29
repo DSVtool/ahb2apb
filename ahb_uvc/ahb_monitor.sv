@@ -52,6 +52,8 @@ task ahb_monitor::run_phase(uvm_phase phase);
 
 	@(posedge vif.reset_n);
 
+	`uvm_info("ahb_monitor - build_phase", $psprintf("Reset done"), UVM_NONE);
+
 	forever begin
 		@(`AHB_MON_IF);
 		fork

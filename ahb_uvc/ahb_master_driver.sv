@@ -46,8 +46,12 @@ endfunction
 task ahb_master_drv::run_phase(uvm_phase phase);
 	super.run_phase(phase);
 
+	@(posedge vif.reset_n);
+
 	@(posedge vif.clk);
 	init();	
+
+	`uvm_info("ahb_master_driver - build_phase", $psprintf("Reset and init done"), UVM_NONE);
 
 	forever begin
 		//@(`AHB_IF);
