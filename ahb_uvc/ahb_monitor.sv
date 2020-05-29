@@ -113,8 +113,8 @@ task ahb_monitor::main_task();
 								default_ap.write(trans);													// writing to the analysis port
 						end	
 				end		
-			i=0;	
-		end		*/
+			i=0;*/	
+		end		
 endtask
 
 
