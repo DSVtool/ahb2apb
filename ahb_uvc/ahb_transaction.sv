@@ -45,6 +45,7 @@ class ahb_tr #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_sequence_i
 		tr_delay inside {[0:60]};
 		soft hsel == 1;
 		soft hburst == 1;
+		soft hwrite == 0;
 	}
 	
 	constraint undefburst_c {	
