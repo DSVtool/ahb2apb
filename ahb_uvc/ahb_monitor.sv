@@ -81,7 +81,7 @@ task ahb_monitor::main_task();
 		begin	
 			while(trans_flag2 !== 2)
 				begin
-					if(1)
+					if(`AHB_MON_IF.hready == 1)
 						begin
 							@(posedge vif.clk) 	
 								
