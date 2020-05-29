@@ -49,9 +49,14 @@ class ahb_tr #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_sequence_i
 	}
 	
 	constraint undefburst_c {	
-		undefburst_lenght  inside {[1:max_length]};
 		if( hburst !== 1)
-			undefburst_lenght == 0;
+			begin
+				undefburst_lenght == 0;
+			end	
+		else
+			begin
+				undefburst_lenght  inside {[1:max_length]};
+			end
 	}
 	
 	constraint blenght_c{
