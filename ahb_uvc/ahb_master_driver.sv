@@ -101,8 +101,7 @@ task ahb_master_drv::drive();
 								`AHB_IF.haddr  <= req.haddr;												/*single burst transfer*/
 								`AHB_IF.hsize  <= req.hsize;
 								`AHB_IF.hwrite <= req.hwrite;
-								`AHB_IF.htrans <= 2'b10;
-								
+								`AHB_IF.htrans <= 2'b10;	
 								if(req.hwrite)															/*write transfer*/
 									begin
 										while (!ready_flag)												//Wait for ready signal

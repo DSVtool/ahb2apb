@@ -15,10 +15,10 @@ class ahb_tr #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_sequence_i
 		 bit [AHB_BUS_W-1:0] hrdata;	
     rand bit [2:0]  hburst;
     rand bit [2:0]  hsize; 					// The transfer size set by HSIZE must be less than or equal to the width of the data bus.			
-    rand bit [1:0]  htrans;  				// 00-IDLE / 01-BUSY / 10-NONSEQUENTAL / 11-SEQUENTAL
+    	 bit [1:0]  htrans;  				// 00-IDLE / 01-BUSY / 10-NONSEQUENTAL / 11-SEQUENTAL
 	rand bit 		hwrite;
    		 bit 		hready;
-   		 bit 		hsel;
+   	rand bit 		hsel;
 	rand int 		tr_delay;
 	rand int 		blenght;
 	rand int		undefburst_lenght;
