@@ -11,7 +11,7 @@
 
 class ahb_monitor #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_monitor;
 
-	virtual interface ahb_vif #(AHB_BUS_W,AHB_ADDR_W) vif;
+	virtual ahb_vif #(AHB_BUS_W,AHB_ADDR_W) vif;
 
 	uvm_analysis_port #(ahb_tr #(AHB_BUS_W,AHB_ADDR_W)) default_ap;
  
