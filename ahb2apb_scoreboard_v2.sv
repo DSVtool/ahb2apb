@@ -108,8 +108,6 @@ function ahb2apb_scoreboard::wdata_compare();
 
 endfunction	
 
-
-
 function ahb2apb_scoreboard::rdata_compare();					
 
 	int i,j; 
