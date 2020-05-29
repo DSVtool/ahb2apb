@@ -42,7 +42,7 @@ class ahb_tr #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_sequence_i
 	    
     constraint general_c {	
     	hsize < $clog2(AHB_BUS_W)-2;
-		tr_delay inside {[0:60]};
+		tr_delay inside {[0:5]};
 		soft hsel == 1;
 		soft hburst == 0;
 		soft hwrite == 0;

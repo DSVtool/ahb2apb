@@ -91,7 +91,7 @@ task ahb_master_drv::drive();
 
 	`uvm_info("ahb driver", "hello-5", UVM_LOW)
 	repeat(req.tr_delay)
-		@(`AHB_IF);  
+		@(posedge vif.clk);  
 	`uvm_info("ahb driver", "hello-4", UVM_LOW)
 	if(req.hsel)
 		begin
