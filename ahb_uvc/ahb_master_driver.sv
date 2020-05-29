@@ -107,8 +107,10 @@ task ahb_master_drv::drive();
 									begin
 										while (!ready_flag)												//Wait for ready signal
 											begin
+												`uvm_info("ahb driver", "hello2", UVM_LOW)
 												@(posedge vif.clk);
 												if(`AHB_IF.hready)
+												`uvm_info("ahb driver", "hello2", UVM_LOW)
 													ready_flag = 1;
 											end
 										`AHB_IF.hwdata <= req.hwdata[0];					
