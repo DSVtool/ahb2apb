@@ -122,8 +122,8 @@ task ahb_master_drv::drive();
 												`uvm_info("ahb driver", "hello", UVM_LOW)
 												@(posedge vif.clk);
 												if(/*`AHB_IF.hready*/ 1)
-													`uvm_info("ahb driver", "hello2", UVM_LOW)
 													ready_flag = 1;
+												`uvm_info("ahb driver", "hello2", UVM_LOW)
 											end			
 									end
 							end
