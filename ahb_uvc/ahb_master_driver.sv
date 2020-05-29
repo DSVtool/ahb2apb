@@ -11,7 +11,7 @@
 
 class ahb_master_drv #(parameter AHB_BUS_W = 32, AHB_ADDR_W = 32) extends uvm_driver #(ahb_tr #(AHB_BUS_W,AHB_ADDR_W));
 
-	virtual ahb_vif #(AHB_BUS_W,AHB_ADDR_W) vif;
+	virtual ahb_vif #(AHB_BUS_W,AHB_ADDR_W)  vif;
 
 	`uvm_component_param_utils(ahb_master_drv #(AHB_BUS_W,AHB_ADDR_W)) 
 
@@ -51,7 +51,6 @@ task ahb_master_drv::run_phase(uvm_phase phase);
 
 	forever begin
 		//@(`AHB_IF);
-
 		fork
 			begin
 				fork
