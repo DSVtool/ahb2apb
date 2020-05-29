@@ -88,20 +88,23 @@ task ahb_master_drv::drive();
 	int i;
 	bit ready_flag;
 	int wrap_max, wrap_min, undefburst_lenght_local, haddr_temp;
-	
+
 	repeat(req.tr_delay)
 		@(`AHB_IF);  
-
+	`uvm_info("ahb driver", "hello-4", UVM_LOW)
 	if(req.hsel)
 		begin
-			`AHB_IF.hburst <= req.hburst;	
+			`uvm_info("ahb driver", "hello-3", UVM_LOW)	
+			`AHB_IF.hburst <= req.hburst;
 			@(posedge vif.clk);
 			case(req.hburst) 																	
 				3'b000	:	begin
+					            `uvm_info("ahb driver", "hello-2", UVM_LOW)
 								`AHB_IF.haddr  <= req.haddr;												/*single burst transfer*/
 								`AHB_IF.hsize  <= req.hsize;
 								`AHB_IF.hwrite <= req.hwrite;
-								`AHB_IF.htrans <= 2'b10;	
+								`AHB_IF.htrans <= 2'b10;
+								`uvm_info("ahb driver", "hello-1", UVM_LOW)	
 								if(req.hwrite)															/*write transfer*/
 									begin
 										while (!ready_flag)												//Wait for ready signal
@@ -116,6 +119,7 @@ task ahb_master_drv::drive();
 									end			
 								else																	/*read transfer*/
 									begin
+										`uvm_info("ahb driver", "hello0", UVM_LOW)
 										while (!ready_flag)												//Wait for ready signal
 											begin
 												`uvm_info("ahb driver", "hello", UVM_LOW)
