@@ -46,8 +46,6 @@ endfunction
 task ahb_master_drv::run_phase(uvm_phase phase);
 	super.run_phase(phase);
 
-	@(posedge vif.reset_n);
-
 	@(posedge vif.clk);
 	init();	
 
