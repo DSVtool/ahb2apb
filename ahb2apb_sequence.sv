@@ -19,7 +19,7 @@ ahb_tr hseq;
 	`uvm_object_utils(ahb_seq)
 
 	virtual task body();
-		`uvm_do_on_with(hseq, p_sequencer.ahb_sqr , hburst == 3'b000;);
+		`uvm_do_on_with(hseq, p_sequencer.ahb_sqr , {hburst == 3'b000};);
 	endtask
 
 endclass
