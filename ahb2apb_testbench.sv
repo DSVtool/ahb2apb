@@ -19,7 +19,7 @@ module ahb2apb_testbench;
 
 	/* Clock Generation*/
 
-	always #5 
+	always #1 
 		clk = ~clk;
 
 	/* Generate reset_n */
