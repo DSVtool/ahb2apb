@@ -77,7 +77,8 @@ task ahb_monitor::main_task();
 	`uvm_info("ahb_monitor", "AHB monitor main task started", UVM_LOW);
 
 	forever begin
-		@(`AHB_MON_IF);
+		//@(`AHB_MON_IF);
+		@(posedge vif.clk);
 		begin	
 			while(trans_flag2 !== 2)
 				begin
