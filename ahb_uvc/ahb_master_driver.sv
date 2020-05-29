@@ -109,7 +109,7 @@ task ahb_master_drv::drive();
 											begin
 												`uvm_info("ahb driver", "hello", UVM_LOW)
 												@(posedge vif.clk);
-												if(`AHB_IF.hready)
+												if(/*`AHB_IF.hready*/ 1)
 												`uvm_info("ahb driver", "hello2", UVM_LOW)
 													ready_flag = 1;
 											end
@@ -121,7 +121,7 @@ task ahb_master_drv::drive();
 											begin
 												`uvm_info("ahb driver", "hello", UVM_LOW)
 												@(posedge vif.clk);
-												if(`AHB_IF.hready)
+												if(/*`AHB_IF.hready*/ 1)
 													`uvm_info("ahb driver", "hello2", UVM_LOW)
 													ready_flag = 1;
 											end			
@@ -146,7 +146,7 @@ task ahb_master_drv::drive();
 												while (!ready_flag)										//Wait for ready signal
 													begin
 														@(posedge vif.clk);
-														if(`AHB_IF.hready)
+														if(/*`AHB_IF.hready*/ 1)
 															ready_flag = 1;
 														else
 															`AHB_IF.htrans <= 2'b01;
@@ -161,7 +161,7 @@ task ahb_master_drv::drive();
 												while (!ready_flag)										//Wait for ready signal
 													begin
 														@(posedge vif.clk);
-														if(`AHB_IF.hready)
+														if(/*`AHB_IF.hready*/ 1)
 															ready_flag = 1;
 														else
 															`AHB_IF.htrans <= 2'b01;	
@@ -192,7 +192,7 @@ task ahb_master_drv::drive();
 																while (!ready_flag)								//Wait for ready signal
 																	begin
 																		@(posedge vif.clk);
-																		if(`AHB_IF.hready)
+																		if(/*`AHB_IF.hready*/ 1)
 																			ready_flag = 1;
 																		else
 																			`AHB_IF.htrans <= 2'b01;	
@@ -218,7 +218,7 @@ task ahb_master_drv::drive();
 																while (!ready_flag)								//Wait for ready signal
 																	begin
 																		@(posedge vif.clk);
-																		if(`AHB_IF.hready)
+																		if(/*`AHB_IF.hready*/ 1)
 																			ready_flag = 1;
 																		else
 																			`AHB_IF.htrans <= 2'b01;	
@@ -251,7 +251,7 @@ task ahb_master_drv::drive();
 																	while (!ready_flag)								//Wait for ready signal
 																		begin
 																			@(posedge vif.clk);
-																			if(`AHB_IF.hready)
+																			if(/*`AHB_IF.hready*/ 1)
 																				ready_flag = 1;
 																			else
 																				`AHB_IF.htrans <= 2'b01;	
@@ -273,7 +273,7 @@ task ahb_master_drv::drive();
 																while (!ready_flag)								//Wait for ready signal
 																	begin
 																		@(posedge vif.clk);
-																		if(`AHB_IF.hready)
+																		if(/*`AHB_IF.hready*/ 1)
 																			ready_flag = 1;
 																		else
 																			`AHB_IF.htrans <= 2'b01;				//Busy state
