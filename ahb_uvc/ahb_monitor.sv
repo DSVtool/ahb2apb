@@ -72,7 +72,7 @@ task ahb_monitor::main_task();
 	ahb_tr #(AHB_BUS_W,AHB_ADDR_W) trans;
 	int i = 0;
 	int trans_prev,trans_curr;
-	int trans_flag = 0, trans_flag2 = 1;
+	int trans_flag = 0, trans_flag2 = 0;
 	
 	`uvm_info("ahb_monitor", "AHB monitor main task started", UVM_LOW);
 
@@ -81,7 +81,7 @@ task ahb_monitor::main_task();
 		begin	
 			while(trans_flag2 !== 2)
 				begin
-					if(`AHB_MON_IF.hready == 1)
+					if(1)
 						begin
 							@(posedge vif.clk) 	
 								
