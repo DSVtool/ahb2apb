@@ -78,8 +78,7 @@ task ahb_monitor::main_task();
 
 	forever begin
 
-			repeat(20)
-		@(posedge vif.clk); 
+		#20
 			`uvm_info("ahb_monitor", "AHB monitor main task 1", UVM_LOW);
 
 		/*@(`AHB_MON_IF);
